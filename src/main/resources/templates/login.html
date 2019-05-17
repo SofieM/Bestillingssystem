@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Login</title>
+    <style>
+
+        section h2, section a{
+            padding-left: 30px;
+        }
+
+        #login_form{
+            padding-left: 30px;
+        }
+
+        #login_form label{
+            width: 150px;
+            float: left;
+        }
+
+        #login_form input, #login_form label{
+            margin-top: 10px;
+        }
+
+        .error{
+            color: red;
+            border: red;
+
+        }
+
+
+    </style>
+
+</head>
+
+
+<body>
+<header>
+    <div th:insert="fragments/header :: header"></div>
+</header>
+
+<section>
+    <h2>Login</h2>
+
+
+    <form th:action="@{/login}" method="post" id="login_form">
+
+        <div th:if="${error}">
+            <div class="error">
+                <h3>Forkert brugernavn eller password</h3>
+                <h3> Prøv igen</h3>
+            </div>
+        </div>
+
+
+        </div>
+
+        <label>Brugernavn</label>
+        <input type="text" name="brugernavn" placeholder="Brugernavn"  >
+        <!--<br> er et break-tag (skifter linje, så username og password ikke er på samme linje)-->
+        <br>
+        <label>Password</label>
+        <input type="password" name="password" placeholder="password"  >
+        </br>
+        <input type="submit" value="Login">
+    </form>
+    <br>
+    <a href="/opretBruger">Har du ikke allerede en bruger, kan du oprette dig her</a>
+</section>
+</body>
+</html>
