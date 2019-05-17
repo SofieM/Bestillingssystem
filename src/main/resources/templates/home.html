@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Home</title>
+    <style>
+
+        #home{
+            padding: 30px;
+        }
+
+        #home div, #home button{
+            margin-top: 10px;
+            height: 40px;
+            width: 100px;
+            font-size: large;
+        }
+
+        #home button{
+            background-color: lavender;
+            border-bottom-color: #818181;
+        }
+    </style>
+
+</head>
+<body>
+<header>
+    <div th:insert="static/header :: header"></div>
+</header>
+
+
+<div id="home">
+    <h1> Høstergaard Smørrebrød </h1>
+    <!--<div>-->
+        <!--<button>-->
+            <!--<a href="/lægeStartsside"> Læge </a>-->
+        <!--</button>-->
+    <!--</div>-->
+    <!--<div>-->
+        <!--<button >-->
+            <!--<a href="/login"> Sekretær </a>-->
+        <!--</button>-->
+    <!--</div>-->
+</div>
+
+</body>
+</html>
