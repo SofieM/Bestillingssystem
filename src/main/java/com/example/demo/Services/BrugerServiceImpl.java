@@ -29,7 +29,7 @@ public class BrugerServiceImpl implements BrugerService{
 
     }
     @Override
-    public boolean ValiderBruger(String brugernavn, String password) throws SQLException, ClassNotFoundException{
+    public boolean validerBruger(String brugernavn, String password) throws SQLException, ClassNotFoundException{
 
         ResultSet resultSet = brugerRepository.selectBruger();
 
@@ -43,13 +43,27 @@ public class BrugerServiceImpl implements BrugerService{
             brugere.add(new Bruger(gemtBrugernavn, gemtPassword));
         }
 
-        for (int i = 0; i < brugere.size() ; i++) {
+        String bNavn;
+        String pWord;
+        for (int i = 0; i < brugere.size(); i++) {
 
-            String bNavn = 
+            bNavn = brugere.get(i).getBrugernavn();
+            pWord = brugere.get(i).getPassword();
+            if (brugernavn.equals(bNavn) && password.equals(pWord)){
 
+                return true;
+            }
+
+            else{
+
+                return false;
+            }
         }
-
+        return false;
     }
 
-
+    @Override
+    public List<Bruger> findBruger() {
+        return null;
+    }
 }

@@ -8,6 +8,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.context.request.WebRequest;
 
 import java.sql.SQLException;
 
@@ -27,6 +28,20 @@ public class HomeController {
     public String login(){
 
         return "login";
+    }
+
+    @PostMapping("/login")
+    public String login(Model model, Bruger bruger) throws SQLException, ClassNotFoundException {
+
+    String brugernavn = bruger.getBrugernavn();
+    String password = bruger.getPassword();
+
+    if (brugerService.validerBruger(brugernavn, password)){
+        return "redirect:/";
+    }
+    else{
+        return "login";
+    }
     }
 
     @GetMapping("/opretBruger")
