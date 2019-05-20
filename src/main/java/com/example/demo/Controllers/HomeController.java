@@ -47,7 +47,7 @@ public class HomeController {
 
     if (brugerService.validerBruger(brugernavn, password)) {
 
-        return "BrugerSide";
+        return "redirect:/BrugerSide";
     }
     else{
         return "login";
