@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<div th:fragment="sidebarAdmin">
+    <head>
+        <meta charset="UTF-8">
+        <title>Sidebar Læge</title>
+        <link rel="stylesheet" type="text/css" href="../styles.css">
+
+        <style>
+            body {
+                font-family: "Lato", sans-serif;
+            }
+            #wrapper {
+                margin-left: 200px;
+                margin-right: 50px;
+            }
+            /*#tildelDiagnose textarea, #opret_recept textarea, #opret_konsultation textarea{*/
+                /*margin-top: 10px;*/
+                /*width: 190px;*/
+                /*height: 100px;*/
+            /*}*/
+
+            /*#tel input, #o input, #opret_konsultation input {*/
+                /*padding-left: 30px;*/
+                /*margin-top: 10px;*/
+            /*}*/
+
+            /*#tildelDiagnose label, #opret_recept label, #opret_konsultation label{*/
+                /*margin-top: 10px;*/
+                /*width: 150px;*/
+                /*float: left;*/
+            /*}*/
+
+            .sidenav {
+                height: 100%;
+                padding-top: 30px;
+                width: 160px;
+                position: fixed;
+                z-index: 1;
+                top: 50px;
+                left: 0;
+                background-color: #111;
+                overflow-x: hidden;
+
+            }
+
+            .sidenav a {
+                padding: 6px 8px 6px 16px;
+                text-decoration: none;
+                font-size: 20px;
+                color: #818181;
+                display: block;
+            }
+
+            .sidenav a:hover {
+                color: #f1f1f1;
+            }
+        </style>
+    </head>
+    <body>
+
+    <div class="sidenav">
+        <a href="/adminSide">Admin Home </a>
+        <a href="/alleBestillinger">Håndter Bestillinger</a>
+        <a href="/godkendteBestillinger">Se Bestillinger</a>
+
+    </div>
+
+
+    <div id="wrapper">
+
+    </div>
+    </body>
+</html>

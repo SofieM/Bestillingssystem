@@ -9,14 +9,29 @@
     <div th:insert="fragments/header :: header"></div>
 </header>
 
-<div th:each ="bruger : ${brugere}">
+<div th:insert="fragments/sidebarBruger :: sidebarBruger"></div>
 
-        <p th:text="${bruger.fornavn}"></p>
-        <p th:text="${bruger.efternavn}"></p>
-        <p th:text="${bruger.adresse}"></p>
-        <p th:number="${bruger.telefon}"></p>
-        <p th:text="${bruger.email}"></p>
+<div class="container">
 
+    <h1>Høstergaard Smørrebrød</h1>
+    <h3>Menu</h3>
+
+    <div></div>
+    <table class="table table-striped table-bordered table-hover">
+        <thead>
+        <tr>
+            <th>Vare</th>
+            <th>Pris</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="menu: ${menu}">
+            <td th:text="${menu.itemNavn}"/>
+            <td th:text="${menu.itemPris}"/>
+
+        </tr>
+        </tbody>
+    </table>
 </div>
 
 

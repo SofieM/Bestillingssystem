@@ -1,7 +1,7 @@
 package com.example.demo.Models;
 
 import org.springframework.boot.autoconfigure.domain.EntityScan;
-import org.springframework.web.bind.annotation.ModelAttribute;
+
 
 @EntityScan
 public class Bruger {
