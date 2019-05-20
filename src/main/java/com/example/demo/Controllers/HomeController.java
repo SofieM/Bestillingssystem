@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.context.request.WebRequest;
 
 import java.sql.SQLException;
+import java.util.List;
 
 @Controller
 public class HomeController {
@@ -25,13 +26,16 @@ public class HomeController {
     }
 
     @GetMapping("/login")
-    public String login(){
+    public String login(Model model, Bruger bruger, WebRequest wr) throws SQLException, ClassNotFoundException {
+
+        List<Bruger> brugere = brugerService.findBruger();
+        model.addAttribute("brugere", brugere);
 
         return "login";
     }
 
     @PostMapping("/login")
-    public String login(Model model, @ModelAttribute Bruger bruger) throws SQLException, ClassNotFoundException {
+    public String login(Bruger bruger) throws SQLException, ClassNotFoundException {
 
     String brugernavn = bruger.getBrugernavn();
     String password = bruger.getPassword();
@@ -42,12 +46,20 @@ public class HomeController {
     }
 
     if (brugerService.validerBruger(brugernavn, password)) {
-        brugerService.findBruger(brugernavn, password);
+
         return "BrugerSide";
     }
     else{
         return "login";
     }
+    }
+
+    @GetMapping("/BrugerSide")
+    public String brugerSide(Model model) throws SQLException, ClassNotFoundException {
+
+        List<Bruger> brugere = brugerService.findBruger();
+        model.addAttribute("brugere", brugere);
+        return "BrugerSide";
     }
 
     @GetMapping("/opretBruger")

@@ -55,10 +55,10 @@ public ResultSet selectBrugerLogin() throws SQLException, ClassNotFoundException
     return resultSet;
 }
 
-public ResultSet selectBruger(String brugernavn, String password) throws SQLException, ClassNotFoundException{
+public ResultSet selectBruger() throws SQLException, ClassNotFoundException{
 
     Statement stmt = DatabaseConfig.getConnection().createStatement();
-    String selectBruger = "SELECT fornavn, efternavn, adresse, telefon, email from brugere WHERE brugernavn = '" + brugernavn + "' AND password = '" + password +"';";
+    String selectBruger = "SELECT fornavn, efternavn, adresse, telefon, email from brugere";
     ResultSet resultSet = stmt.executeQuery(selectBruger);
     return resultSet;
 }

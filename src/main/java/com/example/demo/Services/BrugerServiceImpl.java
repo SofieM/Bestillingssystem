@@ -39,7 +39,7 @@ public class BrugerServiceImpl implements BrugerService{
 
             String gemtBrugernavn = resultSet.getString("brugernavn");
             String gemtPassword = resultSet.getString("password");
-            
+
             brugere.add(new Bruger(gemtBrugernavn, gemtPassword));
         }
 
@@ -61,12 +61,13 @@ public class BrugerServiceImpl implements BrugerService{
             return false;
 
     }
+    @Override
+    public List<Bruger> findBruger() throws SQLException, ClassNotFoundException {
 
-    public Bruger findBruger(String brugernavn, String password) throws SQLException, ClassNotFoundException {
+        ResultSet resultSet = brugerRepository.selectBruger();
 
-        ResultSet resultSet = brugerRepository.selectBruger(brugernavn, password);
+        List<Bruger> brugere = new ArrayList<>();
 
-        Bruger bruger = new Bruger();
         while (resultSet.next()) {
 
             String gemtFornavn = resultSet.getString("fornavn");
@@ -75,10 +76,18 @@ public class BrugerServiceImpl implements BrugerService{
             int gemtTelefon = resultSet.getInt("telefon");
             String gemtEmail = resultSet.getString("email");
 
-            bruger = new Bruger(brugernavn, password, gemtFornavn, gemtEfternavn, gemtAdresse, gemtTelefon, gemtEmail);
+            brugere.add(new Bruger(gemtFornavn, gemtEfternavn, gemtAdresse, gemtTelefon, gemtEmail));
         }
+//
+//        String fNavn = brugere.get(0).getFornavn();
+//        String eNavn = brugere.get(0).getEfternavn();
+//        String adr = brugere.get(0).getAdresse();
+//        int tlf = brugere.get(0).getTelefon();
+//        String mail = brugere.get(0).getEmail();
+//
+//        Bruger bruger = new Bruger(brugernavn, password, fNavn, eNavn, adr, tlf, mail);
 
-        return bruger;
+        return brugere;
 
     }
 

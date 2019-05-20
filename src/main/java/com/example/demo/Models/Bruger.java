@@ -1,5 +1,9 @@
 package com.example.demo.Models;
 
+import org.springframework.boot.autoconfigure.domain.EntityScan;
+import org.springframework.web.bind.annotation.ModelAttribute;
+
+@EntityScan
 public class Bruger {
 
     private String brugernavn;
@@ -24,6 +28,14 @@ public class Bruger {
     public Bruger(String brugernavn, String password) {
         this.brugernavn = brugernavn;
         this.password = password;
+    }
+
+    public Bruger(String fornavn, String efternavn, String adresse, int telefon, String email) {
+        this.fornavn = fornavn;
+        this.efternavn = efternavn;
+        this.adresse = adresse;
+        this.telefon = telefon;
+        this.email = email;
     }
 
     public Bruger(){
@@ -92,5 +104,6 @@ public class Bruger {
     public void setEmail(String email) {
         this.email = email;
     }
+
 
 }
