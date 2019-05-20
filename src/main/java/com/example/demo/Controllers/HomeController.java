@@ -31,13 +31,19 @@ public class HomeController {
     }
 
     @PostMapping("/login")
-    public String login(Model model, Bruger bruger) throws SQLException, ClassNotFoundException {
+    public String login(Model model, @ModelAttribute Bruger bruger) throws SQLException, ClassNotFoundException {
 
     String brugernavn = bruger.getBrugernavn();
     String password = bruger.getPassword();
 
-    if (brugerService.validerBruger(brugernavn, password)){
-        return "redirect:/";
+    if(brugerService.tjekAdminLogin(brugernavn,password)){
+
+        return "adminSide";
+    }
+
+    if (brugerService.validerBruger(brugernavn, password)) {
+        brugerService.findBruger(brugernavn, password);
+        return "BrugerSide";
     }
     else{
         return "login";

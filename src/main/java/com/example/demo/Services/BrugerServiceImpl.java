@@ -31,7 +31,7 @@ public class BrugerServiceImpl implements BrugerService{
     @Override
     public boolean validerBruger(String brugernavn, String password) throws SQLException, ClassNotFoundException {
 
-        ResultSet resultSet = brugerRepository.selectBruger();
+        ResultSet resultSet = brugerRepository.selectBrugerLogin();
 
         List<Bruger> brugere = new ArrayList<>();
 
@@ -39,24 +39,22 @@ public class BrugerServiceImpl implements BrugerService{
 
             String gemtBrugernavn = resultSet.getString("brugernavn");
             String gemtPassword = resultSet.getString("password");
-
+            
             brugere.add(new Bruger(gemtBrugernavn, gemtPassword));
         }
 
-
         String bNavn;
         String pWord;
-
 
         for (int i = 0; i < brugere.size(); i++) {
 
             bNavn = brugere.get(i).getBrugernavn();
             pWord = brugere.get(i).getPassword();
 
+
             if (brugernavn.equals(bNavn) && password.equals(pWord)) {
 
                 return true;
-
             }
 
        }
@@ -64,8 +62,33 @@ public class BrugerServiceImpl implements BrugerService{
 
     }
 
-    @Override
-    public List<Bruger> findBruger() {
-        return null;
+    public Bruger findBruger(String brugernavn, String password) throws SQLException, ClassNotFoundException {
+
+        ResultSet resultSet = brugerRepository.selectBruger(brugernavn, password);
+
+        Bruger bruger = new Bruger();
+        while (resultSet.next()) {
+
+            String gemtFornavn = resultSet.getString("fornavn");
+            String gemtEfternavn = resultSet.getString("efternavn");
+            String gemtAdresse = resultSet.getString("adresse");
+            int gemtTelefon = resultSet.getInt("telefon");
+            String gemtEmail = resultSet.getString("email");
+
+            bruger = new Bruger(brugernavn, password, gemtFornavn, gemtEfternavn, gemtAdresse, gemtTelefon, gemtEmail);
+        }
+
+        return bruger;
+
     }
+
+    @Override
+    public boolean tjekAdminLogin(String username, String password) {
+
+        if (username.equals("admin") && password.equals("admin")){
+            return true;
+        }
+        return false;
+    }
+
 }
