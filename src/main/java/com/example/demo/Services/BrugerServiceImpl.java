@@ -28,56 +28,80 @@ public class BrugerServiceImpl implements BrugerService{
             bruger.getEmail());
 
     }
+//    @Override
+//    public boolean validerBruger(String brugernavn, String password) throws SQLException, ClassNotFoundException {
+//
+//        ResultSet resultSet = brugerRepository.selectBrugerLogin();
+//
+//        List<Bruger> brugere = new ArrayList<>();
+//
+//        while (resultSet.next()) {
+//
+//            String gemtBrugernavn = resultSet.getString("brugernavn");
+//            String gemtPassword = resultSet.getString("password");
+//
+//            brugere.add(new Bruger(gemtBrugernavn, gemtPassword));
+//        }
+//
+//        String bNavn;
+//        String pWord;
+//
+//        for (int i = 0; i < brugere.size(); i++) {
+//
+//            bNavn = brugere.get(i).getBrugernavn();
+//            pWord = brugere.get(i).getPassword();
+//
+//
+//            if (brugernavn.equals(bNavn) && password.equals(pWord)) {
+//
+//                return true;
+//            }
+//
+//       }
+//            return false;
+//
+//    }
+
+
     @Override
-    public boolean validerBruger(String brugernavn, String password) throws SQLException, ClassNotFoundException {
+    public boolean validerBruger(String brugernavn, String password, Bruger bruger) throws SQLException, ClassNotFoundException {
+        ResultSet resultSet = brugerRepository.selectBruger(bruger);
 
-        ResultSet resultSet = brugerRepository.selectBrugerLogin();
+        while (resultSet.next()){
 
-        List<Bruger> brugere = new ArrayList<>();
+            bruger.setBrugerID(resultSet.getInt("brugerID"));
+            bruger.setBrugernavn(resultSet.getString("brugernavn"));
+            bruger.setPassword(resultSet.getString("password"));
+            bruger.setFornavn(resultSet.getString("fornavn"));
+            bruger.setEfternavn(resultSet.getString("efternavn"));
+            bruger.setAdresse(resultSet.getString("adresse"));
+            bruger.setTelefon(resultSet.getInt("telefon"));
+            bruger.setEmail(resultSet.getString("email"));
 
-        while (resultSet.next()) {
-
-            String gemtBrugernavn = resultSet.getString("brugernavn");
-            String gemtPassword = resultSet.getString("password");
-
-            brugere.add(new Bruger(gemtBrugernavn, gemtPassword));
-        }
-
-        String bNavn;
-        String pWord;
-
-        for (int i = 0; i < brugere.size(); i++) {
-
-            bNavn = brugere.get(i).getBrugernavn();
-            pWord = brugere.get(i).getPassword();
-
-
-            if (brugernavn.equals(bNavn) && password.equals(pWord)) {
-
+            if(brugernavn.equals(bruger.getBrugernavn()) && password.equals(bruger.getPassword())){
                 return true;
             }
-
-       }
-            return false;
-
-    }
-    @Override
-    public List<Bruger> findBruger() throws SQLException, ClassNotFoundException {
-
-        ResultSet resultSet = brugerRepository.selectBruger();
-
-        List<Bruger> brugere = new ArrayList<>();
-
-        while (resultSet.next()) {
-
-            String gemtFornavn = resultSet.getString("fornavn");
-            String gemtEfternavn = resultSet.getString("efternavn");
-            String gemtAdresse = resultSet.getString("adresse");
-            int gemtTelefon = resultSet.getInt("telefon");
-            String gemtEmail = resultSet.getString("email");
-
-            brugere.add(new Bruger(gemtFornavn, gemtEfternavn, gemtAdresse, gemtTelefon, gemtEmail));
         }
+        return false;
+    }
+
+//    @Override
+//    public List<Bruger> findBruger() throws SQLException, ClassNotFoundException {
+//
+//        ResultSet resultSet = brugerRepository.selectBruger();
+//
+//        List<Bruger> brugere = new ArrayList<>();
+//
+//        while (resultSet.next()) {
+//
+//            String gemtFornavn = resultSet.getString("fornavn");
+//            String gemtEfternavn = resultSet.getString("efternavn");
+//            String gemtAdresse = resultSet.getString("adresse");
+//            int gemtTelefon = resultSet.getInt("telefon");
+//            String gemtEmail = resultSet.getString("email");
+//
+//            brugere.add(new Bruger(gemtFornavn, gemtEfternavn, gemtAdresse, gemtTelefon, gemtEmail));
+//        }
 //
 //        String fNavn = brugere.get(0).getFornavn();
 //        String eNavn = brugere.get(0).getEfternavn();
@@ -87,9 +111,12 @@ public class BrugerServiceImpl implements BrugerService{
 //
 //        Bruger bruger = new Bruger(brugernavn, password, fNavn, eNavn, adr, tlf, mail);
 
-        return brugere;
+//        return brugere;
+//
+//    }
 
-    }
+
+
 
     @Override
     public boolean tjekAdminLogin(String username, String password) {
@@ -99,5 +126,7 @@ public class BrugerServiceImpl implements BrugerService{
         }
         return false;
     }
+
+
 
 }

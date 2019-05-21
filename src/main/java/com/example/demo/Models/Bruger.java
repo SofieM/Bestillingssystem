@@ -3,7 +3,6 @@ package com.example.demo.Models;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
 
 
-@EntityScan
 public class Bruger {
 
     private String brugernavn;
@@ -36,6 +35,10 @@ public class Bruger {
         this.adresse = adresse;
         this.telefon = telefon;
         this.email = email;
+    }
+
+    public Bruger(int brugerID) {
+        this.brugerID = brugerID;
     }
 
     public Bruger(){

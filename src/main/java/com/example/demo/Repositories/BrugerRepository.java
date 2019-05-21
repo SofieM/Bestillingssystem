@@ -1,8 +1,10 @@
 package com.example.demo.Repositories;
 
 import com.example.demo.Configurations.DatabaseConfig;
+import com.example.demo.Models.Bruger;
 import org.springframework.stereotype.Repository;
 
+import javax.xml.transform.Result;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -55,13 +57,14 @@ public ResultSet selectBrugerLogin() throws SQLException, ClassNotFoundException
     return resultSet;
 }
 
-public ResultSet selectBruger() throws SQLException, ClassNotFoundException{
+public ResultSet selectBruger(Bruger bruger) throws SQLException, ClassNotFoundException{
 
     Statement stmt = DatabaseConfig.getConnection().createStatement();
-    String selectBruger = "SELECT fornavn, efternavn, adresse, telefon, email from brugere";
+    String selectBruger = "SELECT * from brugere";
     ResultSet resultSet = stmt.executeQuery(selectBruger);
     return resultSet;
 }
+
 
 public void SQLExecute(String SQL) throws SQLException, ClassNotFoundException {
 
