@@ -77,11 +77,11 @@ public class BrugerServiceImpl implements BrugerService{
             bruger.setAdresse(resultSet.getString("adresse"));
             bruger.setTelefon(resultSet.getInt("telefon"));
             bruger.setEmail(resultSet.getString("email"));
+        }
 
             if(brugernavn.equals(bruger.getBrugernavn()) && password.equals(bruger.getPassword())){
                 return true;
             }
-        }
         return false;
     }
 

@@ -95,14 +95,7 @@ public class HomeController {
             if(v instanceof Boolean && (Boolean) v) {
                 List<Menu> menu = menuService.hentMenu();
                 model.addAttribute("menu", menu);
-                session.setAttribute("brugerId",bruger.getBrugerID());
-                session.setAttribute("brugernavn",bruger.getBrugernavn());
-                session.setAttribute("password",bruger.getPassword());
-                session.setAttribute("fornavn", bruger.getFornavn());
-                session.setAttribute("efternavn",bruger.getEfternavn());
-                session.setAttribute("adresse", bruger.getAdresse());
-                session.setAttribute("telefon",bruger.getTelefon());
-                session.setAttribute("email", bruger.getEmail());
+
                 return "BrugerSide";
             } else {
                 return "redirect:/";
