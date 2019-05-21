@@ -42,12 +42,13 @@ public class HomeController {
     }
 
     @PostMapping("/login")
-    public String login(HttpSession session, WebRequest wr, Model model,@ModelAttribute(name="bruger")Bruger bruger) throws SQLException, ClassNotFoundException {
+    public String login(HttpSession session, WebRequest wr, Model model, Bruger bruger) throws SQLException, ClassNotFoundException {
 
     String brugernavn = wr.getParameter("brugernavn");
     String password = wr.getParameter("password");
 
     if(brugerService.tjekAdminLogin(brugernavn,password)){
+
 
         session.setAttribute("logged_in", true);
         return "redirect:/adminSide";
@@ -55,6 +56,14 @@ public class HomeController {
 
     else if (brugerService.validerBruger(brugernavn, password, bruger)) {
 
+        session.setAttribute("brugerId",bruger.getBrugerID());
+        session.setAttribute("brugernavn",bruger.getBrugernavn());
+        session.setAttribute("password",bruger.getPassword());
+        session.setAttribute("fornavn", bruger.getFornavn());
+        session.setAttribute("efternavn",bruger.getEfternavn());
+        session.setAttribute("adresse", bruger.getAdresse());
+        session.setAttribute("telefon",bruger.getTelefon());
+        session.setAttribute("email", bruger.getEmail());
         session.setAttribute("logged_in", true);
         return "redirect:/BrugerSide";
     }
@@ -79,13 +88,21 @@ public class HomeController {
     }
 
     @GetMapping("/BrugerSide")
-    public String brugerSide(Model model, HttpSession session) throws SQLException, ClassNotFoundException {
+    public String brugerSide(Model model, HttpSession session, Bruger bruger) throws SQLException, ClassNotFoundException {
 
         try {
             Object v = session.getAttribute("logged_in");
             if(v instanceof Boolean && (Boolean) v) {
                 List<Menu> menu = menuService.hentMenu();
                 model.addAttribute("menu", menu);
+                session.setAttribute("brugerId",bruger.getBrugerID());
+                session.setAttribute("brugernavn",bruger.getBrugernavn());
+                session.setAttribute("password",bruger.getPassword());
+                session.setAttribute("fornavn", bruger.getFornavn());
+                session.setAttribute("efternavn",bruger.getEfternavn());
+                session.setAttribute("adresse", bruger.getAdresse());
+                session.setAttribute("telefon",bruger.getTelefon());
+                session.setAttribute("email", bruger.getEmail());
                 return "BrugerSide";
             } else {
                 return "redirect:/";
