@@ -63,6 +63,7 @@ public class HomeController {
             session.setAttribute("telefon",bruger.getTelefon());
             session.setAttribute("email", bruger.getEmail());
 
+
             //session.setAttribute("bruger", bruger);
             return "redirect:/BrugerSide";
         }
