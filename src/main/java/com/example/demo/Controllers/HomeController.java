@@ -35,42 +35,41 @@ public class HomeController {
     @GetMapping("/login")
     public String login(Model model) throws SQLException, ClassNotFoundException {
 
-        //List<Bruger> brugere = brugerService.findBruger();
+        //List<Bruger> brugere = brugerService.findBruger(bruger);
         //model.addAttribute("brugere", brugere);
 
         return "login";
     }
 
     @PostMapping("/login")
-    public String login(HttpSession session, WebRequest wr, Model model, Bruger bruger) throws SQLException, ClassNotFoundException {
+    public String login(Model model, @ModelAttribute (name="bruger") Bruger bruger, HttpSession session) throws SQLException, ClassNotFoundException {
 
-    String brugernavn = wr.getParameter("brugernavn");
-    String password = wr.getParameter("password");
+        //String brugernavn = wr.getParameter("brugernavn");
+        //String password = wr.getParameter("password");
 
-    if(brugerService.tjekAdminLogin(brugernavn,password)){
+        //if(brugerService.tjekAdminLogin(brugernavn,password)){
 
+          //  return "redirect:/adminSide";
+        //}
 
-        session.setAttribute("logged_in", true);
-        return "redirect:/adminSide";
-    }
+        if (brugerService.validerBruger(bruger)) {
 
-    else if (brugerService.validerBruger(brugernavn, password, bruger)) {
+            session.setAttribute("brugerId",bruger.getBrugerID());
+            //session.setAttribute("brugernavn",bruger.getBrugernavn());
+            //session.setAttribute("password",bruger.getPassword());
+            session.setAttribute("fornavn", bruger.getFornavn());
+            session.setAttribute("efternavn",bruger.getEfternavn());
+            session.setAttribute("adresse", bruger.getAdresse());
+            session.setAttribute("telefon",bruger.getTelefon());
+            session.setAttribute("email", bruger.getEmail());
 
-        session.setAttribute("brugerId",bruger.getBrugerID());
-        session.setAttribute("brugernavn",bruger.getBrugernavn());
-        session.setAttribute("password",bruger.getPassword());
-        session.setAttribute("fornavn", bruger.getFornavn());
-        session.setAttribute("efternavn",bruger.getEfternavn());
-        session.setAttribute("adresse", bruger.getAdresse());
-        session.setAttribute("telefon",bruger.getTelefon());
-        session.setAttribute("email", bruger.getEmail());
-        session.setAttribute("logged_in", true);
-        return "redirect:/BrugerSide";
-    }
-    else{
-        model.addAttribute("error", true);
-        return "login";
-    }
+            //session.setAttribute("bruger", bruger);
+            return "redirect:/BrugerSide";
+        }
+        else{
+            model.addAttribute("error", true);
+            return "login";
+        }
     }
 
     @GetMapping("/opretBruger")
@@ -88,21 +87,14 @@ public class HomeController {
     }
 
     @GetMapping("/BrugerSide")
-    public String brugerSide(Model model, HttpSession session, Bruger bruger) throws SQLException, ClassNotFoundException {
+    public String brugerSide(Model model) throws SQLException, ClassNotFoundException {
 
-        try {
-            Object v = session.getAttribute("logged_in");
-            if(v instanceof Boolean && (Boolean) v) {
+
+        //model.addAttribute("brugere", brugerService.findBruger(id));
                 List<Menu> menu = menuService.hentMenu();
                 model.addAttribute("menu", menu);
 
                 return "BrugerSide";
-            } else {
-                return "redirect:/";
-            }
-        } catch (Exception ee) {
-            return "redirect:/";
-        }
     }
 
     @GetMapping("/lavBestilling")

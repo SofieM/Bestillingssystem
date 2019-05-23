@@ -1,13 +1,16 @@
 package com.example.demo.Models;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Scope;
 import org.springframework.context.annotation.ScopedProxyMode;
 import org.springframework.stereotype.Component;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.context.WebApplicationContext;
 
-@Scope("session")
+
+@EntityScan
 public class Bruger {
 
     private String brugernavn;
@@ -34,7 +37,8 @@ public class Bruger {
         this.password = password;
     }
 
-    public Bruger(String fornavn, String efternavn, String adresse, int telefon, String email) {
+    public Bruger(int brugerID, String fornavn, String efternavn, String adresse, int telefon, String email) {
+        this.brugerID = brugerID;
         this.fornavn = fornavn;
         this.efternavn = efternavn;
         this.adresse = adresse;
@@ -78,7 +82,7 @@ public class Bruger {
     }
 
     public void setFornavn(String fornavn) {
-        this.fornavn = fornavn;
+        this.fornavn = "Sofie";
     }
 
     public String getEfternavn() {
@@ -113,5 +117,8 @@ public class Bruger {
         this.email = email;
     }
 
+    public String toString(){
 
+        return brugerID + " " + fornavn + " " + efternavn;
+    }
 }
