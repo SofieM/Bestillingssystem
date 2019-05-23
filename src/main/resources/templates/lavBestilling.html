@@ -3,6 +3,33 @@
 <head>
     <meta charset="UTF-8">
     <title>Ny bestilling</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <style>
+        #wrapper tr, #wrapper th{
+            border: 1px solid #ddd;
+            padding: 8px;
+        }
+        #wrapper tr:nth-child(even){background-color: #f2f2f2;}
+
+        #wrapper tr:hover {background-color: #ddd;}
+
+        #wrapper th {
+            padding-top: 12px;
+            padding-bottom: 12px;
+            text-align: left;
+            background-color: #4CAF50;
+            color: white;
+        }
+
+        .fa-shopping-cart {
+            font-size: 24px;
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+            width: 40%;
+
+        }
+    </style>
 </head>
 <body>
 <header>
@@ -10,5 +37,28 @@
 </header>
 
 <div th:insert="fragments/sidebarBruger :: sidebarBruger"></div>
+<div id="wrapper">
+<table class="table table-striped table-bordered table-hover">
+    <thead>
+    <tr>
+        <th></th>
+        <th>Pris</th>
+        <th>Tilføj til kurv </th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="menu: ${menu}">
+        <td th:text="${menu.itemNavn}"/>
+        <td th:text="${menu.itemPris}"/>
+        <td>
+            <i class="fa fa-shopping-cart" ></i>
+        </td>
+    </tr>
+    </tbody>
+</table>
+</div>
+
+</div>
+</div>
 </body>
 </html>

@@ -55,8 +55,8 @@ public class HomeController {
         if (brugerService.validerBruger(bruger)) {
 
             session.setAttribute("brugerId",bruger.getBrugerID());
-            //session.setAttribute("brugernavn",bruger.getBrugernavn());
-            //session.setAttribute("password",bruger.getPassword());
+            session.setAttribute("brugernavn",bruger.getBrugernavn());
+            session.setAttribute("password",bruger.getPassword());
             session.setAttribute("fornavn", bruger.getFornavn());
             session.setAttribute("efternavn",bruger.getEfternavn());
             session.setAttribute("adresse", bruger.getAdresse());
@@ -98,7 +98,9 @@ public class HomeController {
     }
 
     @GetMapping("/lavBestilling")
-    public String lavBestilling(){
+    public String lavBestilling(Model model) throws SQLException, ClassNotFoundException {
+        List<Menu> menu = menuService.hentMenu();
+        model.addAttribute("menu", menu);
 
         return "lavBestilling";
     }
