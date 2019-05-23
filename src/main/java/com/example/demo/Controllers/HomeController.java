@@ -106,6 +106,12 @@ public class HomeController {
         return "lavBestilling";
     }
 
+    @PostMapping("/lavBestilling")
+    public String lavBestilling(){
+
+        return "lavBestilling";
+    }
+
     @GetMapping("/seBestillinger")
     public String seBestillinger(){
 
