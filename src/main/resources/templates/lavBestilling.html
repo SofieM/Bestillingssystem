@@ -42,6 +42,7 @@
     <thead>
     <tr>
         <th></th>
+        <th></th>
         <th>Pris</th>
         <th>
           <i class="fa fa-shopping-cart" ></i>
@@ -50,6 +51,7 @@
     </thead>
     <tbody>
     <tr th:each="menu: ${menu}">
+        <td type=hidden th:number="${menu.itemID}"/>
         <td th:text="${menu.itemNavn}"/>
         <td th:text="${menu.itemPris}"/>
         <td>

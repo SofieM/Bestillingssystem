@@ -25,10 +25,11 @@ public class MenuServiceImpl implements MenuService {
 
         while (resultSet.next()) {
 
+            int itemId = resultSet.getInt("itemID");
             String navn = resultSet.getString("navn");
             int pris = resultSet.getInt("pris");
 
-            menu.add(new Menu(navn, pris));
+            menu.add(new Menu(itemId,navn, pris));
         }
 
         return menu;

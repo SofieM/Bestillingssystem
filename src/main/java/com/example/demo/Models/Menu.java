@@ -6,7 +6,8 @@ public class Menu {
     public String itemNavn;
     public int itemPris;
 
-    public Menu(String itemNavn, int itemPris) {
+    public Menu(int itemID, String itemNavn, int itemPris) {
+        this.itemID = itemID;
         this.itemNavn = itemNavn;
         this.itemPris = itemPris;
     }
