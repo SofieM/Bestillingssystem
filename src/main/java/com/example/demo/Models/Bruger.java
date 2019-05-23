@@ -82,7 +82,7 @@ public class Bruger {
     }
 
     public void setFornavn(String fornavn) {
-        this.fornavn = "Sofie";
+        this.fornavn = fornavn;
     }
 
     public String getEfternavn() {

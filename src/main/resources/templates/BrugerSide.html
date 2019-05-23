@@ -45,6 +45,12 @@
     <h1>Høstergaard Smørrebrød</h1>
     <h3>Menu</h3>
     <br>
+    <p th:text ="${session.brugerId}" th:unless="${session==null}"></p>
+    <p th:text ="${session.fornavn}" th:unless="${session==null}"></p>
+    <p th:text ="${session.efternavn}" th:unless="${session==null}"></p>
+    <p th:text ="${session.adresse}" th:unless="${session==null}"></p>
+    <p th:text ="${session.telefon}" th:unless="${session==null}"></p>
+    <p th:text ="${session.email}" th:unless="${session==null}"></p>
     <!--<table class ="table table-striped table-bordered table-hover">-->
      <!--<thead>-->
      <!--<tr>-->
