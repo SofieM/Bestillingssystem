@@ -84,22 +84,18 @@ public class HomeController {
     }
 
     @PostMapping("/login")
-    public String login(Model model, @ModelAttribute (name="bruger") Bruger bruger, HttpSession session) throws SQLException, ClassNotFoundException {
+    public String login(Model model, @ModelAttribute (name="bruger") Bruger bruger, HttpSession session, WebRequest wr) throws SQLException, ClassNotFoundException {
 
-        //String brugernavn = wr.getParameter("brugernavn");
-        //String password = wr.getParameter("password");
+        String brugernavn = wr.getParameter("brugernavn");
+        String password = wr.getParameter("password");
 
-        //if(brugerService.tjekAdminLogin(brugernavn,password)){
+        if(brugerService.tjekAdminLogin(brugernavn,password)){
 
-          //  return "redirect:/adminSide";
-        //}
+            return "redirect:/adminSide";
+        }
 
         if (brugerService.validerBruger(bruger)) {
-//            Object a = session.getAttribute("email");
-//            if(a instanceof String) {
-//                String aa = (String) a;
-//                System.out.println(aa);
-//            }
+
             session.setAttribute("brugerId",bruger.getBrugerID());
             session.setAttribute("brugernavn",bruger.getBrugernavn());
             session.setAttribute("password",bruger.getPassword());
@@ -139,7 +135,6 @@ public class HomeController {
                 List<Menu> menu = menuService.hentMenu();
                 model.addAttribute("menu", menu);
 
-
                 return "BrugerSide";
     }
 
@@ -168,22 +163,24 @@ public class HomeController {
     @GetMapping("/adminSide")
     public String adminSide(HttpSession session){
 
-        try {
-            Object v = session.getAttribute("logged_in");
-            if(v instanceof Boolean && (Boolean) v) {
-
-                return "adminSide";
-            } else {
-                return "redirect:/";
-            }
-        } catch (Exception ee) {
-            return "redirect:/";
-        }
+//        try {
+//            Object v = session.getAttribute("logged_in");
+//            if(v instanceof Boolean && (Boolean) v) {
+//
+//                return "adminSide";
+//            } else {
+//                return "redirect:/";
+//            }
+//        } catch (Exception ee) {
+//            return "redirect:/";
+//        }
+        return "adminSide";
     }
 
     @GetMapping("/alleBestillinger")
-    public String alleBestillinger(){
-
+    public String alleBestillinger(Model model) throws SQLException, ClassNotFoundException {
+        List<Bestilling> alleBestillinger = bestillingsService.hentAlleBestillinger();
+        model.addAttribute("alleBestillinger",alleBestillinger);
         return "alleBestillinger";
     }
 

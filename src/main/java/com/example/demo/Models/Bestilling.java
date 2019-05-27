@@ -7,6 +7,10 @@ public class Bestilling {
 
     private int bestillingsID;
     private int brugerID;
+    private String brugerFornavn;
+    private String brugerEfternavn;
+    private int brugerTelefon;
+    private String brugerEmail;
     private String bestilling;
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private String dato;
@@ -32,6 +36,56 @@ public class Bestilling {
     }
 
     public Bestilling() {
+    }
+
+    public Bestilling(int bestillingsID, String bestilling, String dato, String brugerFornavn, String brugerEfternavn, int brugerTelefon, String brugerEmail) {
+        this.bestillingsID = bestillingsID;
+        this.bestilling = bestilling;
+        this.dato = dato;
+        this.brugerFornavn = brugerFornavn;
+        this.brugerEfternavn = brugerEfternavn;
+        this.brugerTelefon = brugerTelefon;
+        this.brugerEmail = brugerEmail;
+    }
+
+    public int getBestillingsID() {
+        return bestillingsID;
+    }
+
+    public void setBestillingsID(int bestillingsID) {
+        this.bestillingsID = bestillingsID;
+    }
+
+    public String getBrugerFornavn() {
+        return brugerFornavn;
+    }
+
+    public void setBrugerFornavn(String brugerFornavn) {
+        this.brugerFornavn = brugerFornavn;
+    }
+
+    public String getBrugerEfternavn() {
+        return brugerEfternavn;
+    }
+
+    public void setBrugerEfternavn(String brugerEfternavn) {
+        this.brugerEfternavn = brugerEfternavn;
+    }
+
+    public int getBrugerTelefon() {
+        return brugerTelefon;
+    }
+
+    public void setBrugerTelefon(int brugerTelefon) {
+        this.brugerTelefon = brugerTelefon;
+    }
+
+    public String getBrugerEmail() {
+        return brugerEmail;
+    }
+
+    public void setBrugerEmail(String brugerEmail) {
+        this.brugerEmail = brugerEmail;
     }
 
     public String getBestilling() {
