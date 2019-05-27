@@ -55,7 +55,7 @@
 
 
         <label></label>
-        <input type="number" name="brugerID" th:value="${session.brugerID}"/>
+        <input type="hidden" name="brugerID" th:value="${session.brugerId}"/>
         <br>
         <label>Skriv din bestilling her:</label>
         <textarea type="text" name="bestilling" placeholder="Din bestilling" th:field="${bestilling.bestilling}"></textarea>

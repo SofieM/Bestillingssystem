@@ -26,6 +26,11 @@ public class Bestilling {
         this.dato = dato;
     }
 
+    public Bestilling (String bestilling, String dato){
+        this.bestilling=bestilling;
+        this.dato=dato;
+    }
+
     public Bestilling() {
     }
 

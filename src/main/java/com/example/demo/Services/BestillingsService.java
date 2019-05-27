@@ -7,6 +7,6 @@ import java.sql.SQLException;
 @Service
 public interface BestillingsService {
 
-    void tilføjBestilling(Bestilling bestilling) throws SQLException, ClassNotFoundException;
+    void tilføjBestilling(int brugerID, Bestilling bestilling) throws SQLException, ClassNotFoundException;
 
 }

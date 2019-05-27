@@ -153,10 +153,10 @@ public class HomeController {
     }
 
     @PostMapping("/lavBestilling")
-    public String lavBestilling(@ModelAttribute Bestilling bestilling) throws SQLException, ClassNotFoundException {
-
-        bestillingsService.tilføjBestilling(bestilling);
-        return "lavBestilling";
+    public String lavBestilling(@ModelAttribute Bestilling bestilling, @ModelAttribute(name="bruger") Bruger bruger, HttpSession session) throws SQLException, ClassNotFoundException {
+        int brugerID = Integer.parseInt(session.getAttribute("brugerId").toString());
+        bestillingsService.tilføjBestilling(brugerID,bestilling);
+        return "redirect:/lavBestilling";
     }
 
     @GetMapping("/seBestillinger")

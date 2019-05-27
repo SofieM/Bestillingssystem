@@ -15,8 +15,8 @@ public class BestillingsServiceImpl implements BestillingsService{
     BestillingRepository bestillingRepository;
 
     @Override
-    public void tilføjBestilling(Bestilling bestilling) throws SQLException, ClassNotFoundException {
-        bestillingRepository.insertBestilling(bestilling.getBrugerID(), bestilling.getBestilling(), bestilling.getDato());
+    public void tilføjBestilling(int brugerID, Bestilling bestilling) throws SQLException, ClassNotFoundException {
+        bestillingRepository.insertBestilling(brugerID, bestilling.getBestilling(), bestilling.getDato());
 
     }
 }
