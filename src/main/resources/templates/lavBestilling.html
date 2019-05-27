@@ -59,7 +59,6 @@
 
 
         <label></label>
-        <input   type="hidden" name="brugerID" th:value="${session.brugerID}"/>
         <input type="hidden" name="brugerID" th:value="${session.brugerId}"/>
         <br>
         <label>Skriv din bestilling her:</label>
@@ -85,7 +84,7 @@
     <thead>
     <tr>
 
-        <th></th>
+        <th>Nr</th>
         <th></th>
         <th>Pris</th>
 
@@ -101,7 +100,7 @@
     <tr th:each="menu: ${menu}">
         <!--<td th:number="${menu.itemID}">-->
             <!--&lt;!&ndash;<a th:href="@{'/order/' + ${menu.itemID}}">+</a></td>&ndash;&gt;-->
-        <td th:number="${menu.itemID}"/>
+        <td th:text="${menu.itemID}"/>
         <td th:text="${menu.itemNavn}"/>
         <td th:text="${menu.itemPris}"/>
         <!--<td>-->
