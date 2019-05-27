@@ -2,7 +2,7 @@
 <html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
-    <title>Ny bestilling</title>
+    <title>Bestilling</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <style>
 
@@ -54,22 +54,24 @@
     <tr>
         <th></th>
         <th></th>
+        <th></th>
         <th>Pris</th>
-        <th>
-          <i class="fa fa-shopping-cart" ></i>
-        </th>
+        <!--<th>-->
+          <!--<i class="fa fa-shopping-cart" ></i>-->
+        <!--</th>-->
     </tr>
     </thead>
 
     <tbody>
     <div>
     <tr th:each="menu: ${menu}">
-        <td type=hidden th:number="${menu.itemID}"/>
+        <td th:number="${menu.itemID}"><a th:href="@{'/order/' + ${menu.itemID}}">+</a></td>
+        <td th:number="${menu.itemID}"/>
         <td th:text="${menu.itemNavn}"/>
         <td th:text="${menu.itemPris}"/>
-        <td>
-            <input type="number">
-        </td>
+        <!--<td>-->
+            <!--<input type="number">-->
+        <!--</td>-->
     </tr>
     </div>
 

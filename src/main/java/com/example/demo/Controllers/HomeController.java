@@ -32,6 +32,25 @@ public class HomeController {
         return "home";
     }
 
+    @GetMapping("/order/{id}")
+    public String newOrder(@PathVariable("id") Integer id,  HttpSession session) {
+
+        Object order = session.getAttribute(id.toString());
+        if(id.toString().equals(id)) {
+            int amount = (int) order;
+            amount++;
+            System.out.println(amount);
+        } else {
+            // DEN IKKE FINDES
+            session.setAttribute(id.toString(), 1);
+            System.out.println("findes ikke");
+        }
+
+        return "redirect:/lavBestilling";
+    }
+
+
+
     @GetMapping("/login")
     public String login(Model model) throws SQLException, ClassNotFoundException {
 
@@ -53,7 +72,11 @@ public class HomeController {
         //}
 
         if (brugerService.validerBruger(bruger)) {
-
+            Object a = session.getAttribute("email");
+            if(a instanceof String) {
+                String aa = (String) a;
+                System.out.println(aa);
+            }
             session.setAttribute("brugerId",bruger.getBrugerID());
             session.setAttribute("brugernavn",bruger.getBrugernavn());
             session.setAttribute("password",bruger.getPassword());
