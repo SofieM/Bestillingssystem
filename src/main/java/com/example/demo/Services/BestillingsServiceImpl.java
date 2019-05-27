@@ -1,11 +1,24 @@
 package com.example.demo.Services;
 
 import com.example.demo.Models.Bestilling;
+import com.example.demo.Repositories.BestillingRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+@Service
+public class BestillingsServiceImpl implements BestillingsService{
 
-public class BestillingsServiceImpl {
+    @Autowired
+    BestillingRepository bestillingRepository;
 
+    @Override
+    public void tilføjBestilling(Bestilling bestilling) throws SQLException, ClassNotFoundException {
+        bestillingRepository.insertBestilling(bestilling.getBrugerID(), bestilling.getBestilling(), bestilling.getDato());
 
+    }
 }
+
+

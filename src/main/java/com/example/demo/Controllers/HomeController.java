@@ -1,7 +1,9 @@
 package com.example.demo.Controllers;
 
+import com.example.demo.Models.Bestilling;
 import com.example.demo.Models.Bruger;
 import com.example.demo.Models.Menu;
+import com.example.demo.Services.BestillingsService;
 import com.example.demo.Services.BrugerService;
 import com.example.demo.Services.MenuService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +17,8 @@ import org.springframework.web.context.request.WebRequest;
 
 import javax.servlet.http.HttpSession;
 import java.sql.SQLException;
+import java.sql.SQLOutput;
+import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -26,28 +30,47 @@ public class HomeController {
     @Autowired
     MenuService menuService;
 
+    @Autowired
+    BestillingsService bestillingsService;
+
     @GetMapping("/")
     public String home(){
 
         return "home";
     }
 
-    @GetMapping("/order/{id}")
-    public String newOrder(@PathVariable("id") Integer id,  HttpSession session) {
-
-        Object order = session.getAttribute(id.toString());
-        if(id.toString().equals(id)) {
-            int amount = (int) order;
-            amount++;
-            System.out.println(amount);
-        } else {
-            // DEN IKKE FINDES
-            session.setAttribute(id.toString(), 1);
-            System.out.println("findes ikke");
-        }
-
-        return "redirect:/lavBestilling";
-    }
+//    @GetMapping("/order/{id}")
+//    public String newOrder(@PathVariable("id") Integer id,  HttpSession session) {
+//
+//        Object order = session.getAttribute(id.toString());
+//        if(order instanceof Integer){
+//
+//            int amount = (int) order;
+//            for (int i = 0; i < ; i++) {
+//                amount++;
+//                System.out.println(session.getAttribute(id.toString()));
+//                System.out.println(id);
+//                System.out.println("amount: " + amount);
+//            }
+//
+////            List<Bestilling> bestilling = new ArrayList<>();
+////            bestilling.add(new Bestilling(id, amount));
+////
+////            for (int i = 0; i < bestilling.size() ; i++) {
+////
+////                System.out.println("ID" + bestilling.get(i).getItemID());
+////                System.out.println("Amount" + bestilling.get(i).getAmount());
+////
+////            }
+//        } else {
+//            // DEN IKKE FINDES
+//            session.setAttribute(id.toString(), 1);
+//            System.out.println("findes ikke");
+//            System.out.println(session.getAttribute(id.toString()));
+//        }
+//
+//        return "redirect:/lavBestilling";
+//    }
 
 
 
@@ -72,11 +95,11 @@ public class HomeController {
         //}
 
         if (brugerService.validerBruger(bruger)) {
-            Object a = session.getAttribute("email");
-            if(a instanceof String) {
-                String aa = (String) a;
-                System.out.println(aa);
-            }
+//            Object a = session.getAttribute("email");
+//            if(a instanceof String) {
+//                String aa = (String) a;
+//                System.out.println(aa);
+//            }
             session.setAttribute("brugerId",bruger.getBrugerID());
             session.setAttribute("brugernavn",bruger.getBrugernavn());
             session.setAttribute("password",bruger.getPassword());
@@ -113,25 +136,26 @@ public class HomeController {
     @GetMapping("/BrugerSide")
     public String brugerSide(Model model) throws SQLException, ClassNotFoundException {
 
-
-        //model.addAttribute("brugere", brugerService.findBruger(id));
                 List<Menu> menu = menuService.hentMenu();
                 model.addAttribute("menu", menu);
+
 
                 return "BrugerSide";
     }
 
     @GetMapping("/lavBestilling")
-    public String lavBestilling(Model model) throws SQLException, ClassNotFoundException {
+    public String lavBestilling(Model model, Bestilling bestilling) throws SQLException, ClassNotFoundException {
         List<Menu> menu = menuService.hentMenu();
         model.addAttribute("menu", menu);
+        model.addAttribute("bestilling", new Bestilling());
 
         return "lavBestilling";
     }
 
     @PostMapping("/lavBestilling")
-    public String lavBestilling(){
+    public String lavBestilling(@ModelAttribute Bestilling bestilling) throws SQLException, ClassNotFoundException {
 
+        bestillingsService.tilføjBestilling(bestilling);
         return "lavBestilling";
     }
 
