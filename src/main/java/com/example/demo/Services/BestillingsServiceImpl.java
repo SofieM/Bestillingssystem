@@ -86,6 +86,27 @@ public class BestillingsServiceImpl implements BestillingsService{
 
         return godkendteBestillinger;
     }
-}
+
+    @Override
+    public List<Bestilling> hentBrugersBestillinger(int id) throws SQLException, ClassNotFoundException{
+
+            ResultSet resultSet = bestillingRepository.findBrugersBestillinger(id);
+
+            List<Bestilling> brugersBstillinger = new ArrayList<>();
+
+            while (resultSet.next()) {
+
+                int bestillingsID = resultSet.getInt("bestillingsID");
+                String bestilling = resultSet.getString("bestilling");
+                String dato = resultSet.getString("dato");
+
+
+                brugersBstillinger.add(new Bestilling(bestillingsID, bestilling, dato));
+            }
+
+            return brugersBstillinger;
+        }
+    }
+
 
 

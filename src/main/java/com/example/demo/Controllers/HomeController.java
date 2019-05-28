@@ -155,7 +155,11 @@ public class HomeController {
     }
 
     @GetMapping("/seBestillinger/{id}")
-    public String seBestillinger(@PathVariable ("id") String id , HttpSession session){
+    public String seBestillinger(@PathVariable ("id") String id , @ModelAttribute (name="bruger") Bruger bruger, HttpSession session, Model model) throws SQLException, ClassNotFoundException {
+        int brugerID = Integer.parseInt(session.getAttribute("brugerId").toString());
+        System.out.println(brugerID);
+        List<Bestilling> brugersBestillinger = bestillingsService.hentBrugersBestillinger(brugerID);
+        model.addAttribute("brugersBestillinger", brugersBestillinger);
         return "seBestillinger";
     }
 

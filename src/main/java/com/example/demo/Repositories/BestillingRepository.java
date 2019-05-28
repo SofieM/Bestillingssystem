@@ -80,6 +80,16 @@ public class BestillingRepository {
         return resultSet;
     }
 
+    public ResultSet findBrugersBestillinger(int id) throws SQLException, ClassNotFoundException{
+
+        Statement stmt = DatabaseConfig.getConnection().createStatement();
+        String findBrugersBestillinger = "SELECT bestillingsID, bestilling, dato " +
+                                         "FROM godkendtebestillinger " +
+                                         "WHERE brugerID = " + id + ";";
+        ResultSet resultSet = stmt.executeQuery(findBrugersBestillinger);
+        return resultSet;
+    }
+
     public void SQLExecute(String SQL) throws SQLException, ClassNotFoundException {
 
         Statement stmt = DatabaseConfig.getConnection().createStatement();
