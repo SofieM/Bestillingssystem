@@ -154,9 +154,8 @@ public class HomeController {
         return "redirect:/lavBestilling";
     }
 
-    @GetMapping("/seBestillinger")
-    public String seBestillinger(){
-
+    @GetMapping("/seBestillinger/{id}")
+    public String seBestillinger(@PathVariable ("id") String id , HttpSession session){
         return "seBestillinger";
     }
 
