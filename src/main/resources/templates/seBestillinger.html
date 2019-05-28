@@ -52,10 +52,11 @@
         <h2> Mine bestillinger</h2>
         <thead>
         <tr>
-
             <th>BestillingsID</th>
+            <th>BrugerID</th>
             <th>Bestilling</th>
             <th>Dato for afhentning</th>
+            <th>Tidspunkt for afhenting</th>
 
         </tr>
         </thead>
@@ -65,9 +66,10 @@
             <tr th:each="bestilling: ${brugersBestillinger}">
 
                 <td th:text="${bestilling.bestillingsID}"/>
+                <td th:text="${bestilling.brugerID}"/>
                 <td th:text="${bestilling.bestilling}"/>
                 <td th:text="${bestilling.dato}"/>
-
+                <td th:text="${bestilling.klokkeslet}"/>
 
             </tr>
         </div>

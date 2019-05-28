@@ -14,6 +14,9 @@ public class Bestilling {
     private String bestilling;
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private String dato;
+    @DateTimeFormat (pattern = "hh:mm")
+    private String klokkeslet;
+
 //    private int itemID;
 //    private int amount;
 
@@ -23,29 +26,48 @@ public class Bestilling {
 //    }
 
 
-    public Bestilling(int brugerID, String bestilling, String dato) {
+    public Bestilling(int brugerID, String bestilling, String dato, String klokkeslet) {
 
         this.brugerID = brugerID;
         this.bestilling = bestilling;
         this.dato = dato;
+        this.klokkeslet=klokkeslet;
     }
 
-    public Bestilling (String bestilling, String dato){
+    public Bestilling(int bestillingsID, int brugerID, String bestilling, String dato, String klokkeslet) {
+        this.bestillingsID = bestillingsID;
+        this.brugerID = brugerID;
+        this.bestilling = bestilling;
+        this.dato = dato;
+        this.klokkeslet = klokkeslet;
+    }
+
+    public Bestilling (String bestilling, String dato, String klokkeslet){
         this.bestilling=bestilling;
         this.dato=dato;
+        this.klokkeslet = klokkeslet;
     }
 
     public Bestilling() {
     }
 
-    public Bestilling(int bestillingsID, String bestilling, String dato, String brugerFornavn, String brugerEfternavn, int brugerTelefon, String brugerEmail) {
+    public Bestilling(int bestillingsID, String bestilling, String dato, String klokkeslet, String brugerFornavn, String brugerEfternavn, int brugerTelefon, String brugerEmail) {
         this.bestillingsID = bestillingsID;
         this.bestilling = bestilling;
         this.dato = dato;
+        this.klokkeslet = klokkeslet;
         this.brugerFornavn = brugerFornavn;
         this.brugerEfternavn = brugerEfternavn;
         this.brugerTelefon = brugerTelefon;
         this.brugerEmail = brugerEmail;
+    }
+
+    public String getKlokkeslet() {
+        return klokkeslet;
+    }
+
+    public void setKlokkeslet(String klokkeslet) {
+        this.klokkeslet = klokkeslet;
     }
 
     public int getBestillingsID() {

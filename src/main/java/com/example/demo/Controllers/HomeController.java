@@ -155,7 +155,7 @@ public class HomeController {
     }
 
     @GetMapping("/seBestillinger/{id}")
-    public String seBestillinger(@PathVariable ("id") String id , @ModelAttribute (name="bruger") Bruger bruger, HttpSession session, Model model) throws SQLException, ClassNotFoundException {
+    public String seBestillinger(@PathVariable ("id") String id , HttpSession session, Model model) throws SQLException, ClassNotFoundException {
         int brugerID = Integer.parseInt(session.getAttribute("brugerId").toString());
         System.out.println(brugerID);
         List<Bestilling> brugersBestillinger = bestillingsService.hentBrugersBestillinger(brugerID);
@@ -208,6 +208,14 @@ public class HomeController {
         List<Bestilling> godkendteBestillinger = bestillingsService.hentGodkendteBestillinger();
         model.addAttribute("godkendteBestillinger",godkendteBestillinger);
         return "godkendteBestillinger";
+    }
+
+    @GetMapping("afslut/{id}")
+    public String afslutBestilling(@PathVariable ("id") int id) throws SQLException, ClassNotFoundException {
+
+        bestillingsService.sletGodkendtBestilling(id);
+        return "redirect:/godkendteBestillinger";
+
     }
 
 

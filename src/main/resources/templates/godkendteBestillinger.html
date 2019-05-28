@@ -62,6 +62,7 @@
             <th>ID</th>
             <th>Bestilling</th>
             <th>Dato for afhentning</th>
+            <th>Tidspunkt for afhenting</th>
             <th>Brugers fornavn</th>
             <th>Brugers efternavn</th>
             <th>Brugers telefon</th>
@@ -79,13 +80,14 @@
                 <td th:text="${bestilling.bestillingsID}"/>
                 <td th:text="${bestilling.bestilling}"/>
                 <td th:text="${bestilling.dato}"/>
+                <td th:text="${bestilling.klokkeslet}"/>
                 <td th:text="${bestilling.brugerFornavn}"/>
                 <td th:text="${bestilling.brugerEfternavn}"/>
                 <td th:text="${bestilling.brugerTelefon}"/>
                 <td th:text="${bestilling.brugerEmail}"/>
                 <td>
-                    <a  th:href="${'/afvis/' + bestilling.bestillingsID}">
-                        <button class="button button1" id="afvis">Afsluttet</button>
+                    <a  th:href="${'/afslut/' + bestilling.bestillingsID}">
+                        <button class="button button1" id="afslut">Afsluttet</button>
                     </a>
                 </td>
 

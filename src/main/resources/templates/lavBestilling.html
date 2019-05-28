@@ -71,7 +71,9 @@
         <label>Dato for afhenting</label>
         <input type="date" name="dato" placeholder="dato" id="dato" th:field="${bestilling.dato}">
         <br>
-
+        <label>Tidspunkt for afhentning</label>
+        <input type="time" name="klokkeslet" placeholder="klokkeslet" id="klokkeslet" th:field="${bestilling.klokkeslet}">
+        <br>
 
         <input type="submit" value="Send Bestilling">
     </form>

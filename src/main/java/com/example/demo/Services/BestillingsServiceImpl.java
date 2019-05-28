@@ -10,14 +10,14 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 @Service
-public class BestillingsServiceImpl implements BestillingsService{
+public class BestillingsServiceImpl implements BestillingsService {
 
     @Autowired
     BestillingRepository bestillingRepository;
 
     @Override
     public void tilføjBestilling(int brugerID, Bestilling bestilling) throws SQLException, ClassNotFoundException {
-        bestillingRepository.insertBestilling(brugerID, bestilling.getBestilling(), bestilling.getDato());
+        bestillingRepository.insertBestilling(brugerID, bestilling.getBestilling(), bestilling.getDato(), bestilling.getKlokkeslet());
 
     }
 
@@ -32,12 +32,13 @@ public class BestillingsServiceImpl implements BestillingsService{
             int bestillingsID = resultSet.getInt("bestillingsID");
             String bestilling = resultSet.getString("bestilling");
             String dato = resultSet.getString("dato");
+            String klokkeslet = resultSet.getString("klokkeslet");
             String brugerFornavn = resultSet.getString("fornavn");
             String brugerEfternavn = resultSet.getString("efternavn");
             int brugerTelefon = resultSet.getInt("telefon");
             String brugerEmail = resultSet.getString("email");
 
-            bestillinger.add(new Bestilling(bestillingsID, bestilling, dato, brugerFornavn,brugerEfternavn,brugerTelefon,brugerEmail));
+            bestillinger.add(new Bestilling(bestillingsID, bestilling, dato, klokkeslet, brugerFornavn, brugerEfternavn, brugerTelefon, brugerEmail));
         }
 
         return bestillinger;
@@ -49,7 +50,7 @@ public class BestillingsServiceImpl implements BestillingsService{
     }
 
     @Override
-    public void godkendBestilling (int id) throws SQLException, ClassNotFoundException{
+    public void godkendBestilling(int id) throws SQLException, ClassNotFoundException {
 
         ResultSet resultSet = bestillingRepository.findBestilling(id);
 
@@ -59,8 +60,9 @@ public class BestillingsServiceImpl implements BestillingsService{
             int brugerID = resultSet.getInt("brugerID");
             String bestilling = resultSet.getString("bestilling");
             String dato = resultSet.getString("dato");
+            String klokkeslet = resultSet.getString("klokkeslet");
 
-            bestillingRepository.insertGodkendtBestilling(bestillingsID, brugerID, bestilling, dato);
+            bestillingRepository.insertGodkendtBestilling(bestillingsID, brugerID, bestilling, dato, klokkeslet);
         }
 
     }
@@ -76,37 +78,47 @@ public class BestillingsServiceImpl implements BestillingsService{
             int bestillingsID = resultSet.getInt("bestillingsID");
             String bestilling = resultSet.getString("bestilling");
             String dato = resultSet.getString("dato");
+            String klokkeslet = resultSet.getString("klokkeslet");
             String brugerFornavn = resultSet.getString("fornavn");
             String brugerEfternavn = resultSet.getString("efternavn");
             int brugerTelefon = resultSet.getInt("telefon");
             String brugerEmail = resultSet.getString("email");
 
-            godkendteBestillinger.add(new Bestilling(bestillingsID, bestilling, dato, brugerFornavn,brugerEfternavn,brugerTelefon,brugerEmail));
+            godkendteBestillinger.add(new Bestilling(bestillingsID, bestilling, dato, klokkeslet, brugerFornavn, brugerEfternavn, brugerTelefon, brugerEmail));
         }
 
         return godkendteBestillinger;
     }
 
     @Override
-    public List<Bestilling> hentBrugersBestillinger(int id) throws SQLException, ClassNotFoundException{
+    public List<Bestilling> hentBrugersBestillinger(int id) throws SQLException, ClassNotFoundException {
 
-            ResultSet resultSet = bestillingRepository.findBrugersBestillinger(id);
+        ResultSet resultSet = bestillingRepository.findBrugersBestillinger(id);
 
-            List<Bestilling> brugersBstillinger = new ArrayList<>();
+        List<Bestilling> brugersBestillinger = new ArrayList<>();
 
-            while (resultSet.next()) {
+        while (resultSet.next()) {
 
-                int bestillingsID = resultSet.getInt("bestillingsID");
-                String bestilling = resultSet.getString("bestilling");
-                String dato = resultSet.getString("dato");
+            int bestillingsID = resultSet.getInt("bestillingsID");
+            int brugerID = resultSet.getInt("brugerID");
+            String bestilling = resultSet.getString("bestilling");
+            String dato = resultSet.getString("dato");
+            String klokkeslet = resultSet.getString("klokkeslet");
 
 
-                brugersBstillinger.add(new Bestilling(bestillingsID, bestilling, dato));
-            }
-
-            return brugersBstillinger;
+            brugersBestillinger.add(new Bestilling(bestillingsID, brugerID, bestilling, dato, klokkeslet));
         }
+
+        return brugersBestillinger;
+
     }
+
+    @Override
+    public void sletGodkendtBestilling(int id) throws SQLException, ClassNotFoundException {
+        bestillingRepository.deleteGodkendtBestilling(id);
+    }
+
+}
 
 
 
