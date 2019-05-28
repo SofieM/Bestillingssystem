@@ -3,6 +3,47 @@
 <head>
     <meta charset="UTF-8">
     <title>Bestillinger</title>
+
+    <style>
+
+        #wrapper tr, #wrapper th{
+            border: 1px solid #ddd;
+            padding: 8px;
+        }
+        #wrapper tr:nth-child(even){background-color: #f2f2f2;}
+
+        #wrapper tr:hover {background-color: #ddd;}
+
+        #wrapper th {
+            padding-top: 12px;
+            padding-bottom: 12px;
+            text-align: left;
+            background-color: #4CAF50;
+            color: white;
+        }
+
+        .button{
+
+            border: none;
+            color: white;
+            padding: 15px 32px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin: 4px 2px;
+            cursor: pointer;
+            -webkit-transition-duration: 0.4s; /* Safari */
+            transition-duration: 0.4s;
+        }
+        .button:hover {
+            box-shadow: 0 12px 16px 0 rgba(0, 0, 0, 0.24), 0 17px 50px 0 rgba(0, 0, 0, 0.19);
+        }
+
+        .button1{
+            background-color: firebrick; /* red */
+        }
+    </style>
 </head>
 <body>
 <header>
@@ -11,5 +52,49 @@
 
 <div th:insert="fragments/sidebarAdmin :: sidebarAdmin"></div>
 
+<div id="wrapper">
+    <table class="table table-striped table-bordered table-hover">
+        <h1> Høstergaard Smørrebrød</h1>
+        <h2> Aktuelle bestillinger</h2>
+        <thead>
+        <tr>
+
+            <th>ID</th>
+            <th>Bestilling</th>
+            <th>Dato for afhentning</th>
+            <th>Brugers fornavn</th>
+            <th>Brugers efternavn</th>
+            <th>Brugers telefon</th>
+            <th>Brugers email</th>
+            <th>Håndter</th>
+
+
+        </tr>
+        </thead>
+
+        <tbody>
+        <div>
+            <tr th:each="bestilling: ${godkendteBestillinger}">
+
+                <td th:text="${bestilling.bestillingsID}"/>
+                <td th:text="${bestilling.bestilling}"/>
+                <td th:text="${bestilling.dato}"/>
+                <td th:text="${bestilling.brugerFornavn}"/>
+                <td th:text="${bestilling.brugerEfternavn}"/>
+                <td th:text="${bestilling.brugerTelefon}"/>
+                <td th:text="${bestilling.brugerEmail}"/>
+                <td>
+                    <a  th:href="${'/afvis/' + bestilling.bestillingsID}">
+                        <button class="button button1" id="afvis">Afsluttet</button>
+                    </a>
+                </td>
+
+            </tr>
+        </div>
+
+        </tbody>
+
+    </table>
+</div>
 </body>
 </html>

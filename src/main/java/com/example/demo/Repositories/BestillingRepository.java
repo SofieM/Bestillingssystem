@@ -3,6 +3,7 @@ package com.example.demo.Repositories;
 import com.example.demo.Configurations.DatabaseConfig;
 import org.springframework.stereotype.Repository;
 
+import javax.xml.crypto.Data;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -33,6 +34,49 @@ public class BestillingRepository {
                 "ON bestillinger.brugerID = brugere.brugerID " +
                 "ORDER BY bestillinger.bestillingsID asc;";
         ResultSet resultSet = stmt.executeQuery(selectAlleBestillinger);
+        return resultSet;
+    }
+
+    public void deleteBestilling(int id) throws SQLException, ClassNotFoundException{
+
+        String sqlDeleteBestillinger = "DELETE from bestillinger " +
+                                        "WHERE bestillingsID = " + id + ";";
+        SQLExecute(sqlDeleteBestillinger);
+    }
+
+    public ResultSet findBestilling (int id) throws SQLException, ClassNotFoundException{
+
+        Statement stmt = DatabaseConfig.getConnection().createStatement();
+        String findBestilling = "SELECT DISTINCT bestillingsID, brugerID, bestilling, dato " +
+                                "FROM bestillinger " +
+                                "WHERE bestillingsID = " + id + ";";
+        ResultSet resultSet = stmt.executeQuery(findBestilling);
+        return resultSet;
+    }
+
+    public void insertGodkendtBestilling(int bestillingsID, int brugerID, String bestilling, String dato) throws SQLException, ClassNotFoundException {
+
+        String insertGodkendtBestilling = "INSERT INTO godkendtebestillinger" +
+                "(bestillingsID, " +
+                "brugerID, " +
+                "bestilling, " +
+                "dato) " +
+
+                "VALUES " +
+                "('" + bestillingsID + "', '" + brugerID + "', '" +
+                bestilling + "', '" +
+                dato + "')";
+        SQLExecute(insertGodkendtBestilling);
+    }
+    public ResultSet selectGodkendteBestillinger() throws SQLException, ClassNotFoundException {
+
+        Statement stmt = DatabaseConfig.getConnection().createStatement();
+        String selectGodkendteBestillinger= "SELECT godkendtebestillinger.bestillingsID, godkendtebestillinger.bestilling, godkendtebestillinger.dato, brugere.fornavn, brugere.efternavn, brugere.telefon, brugere.email " +
+                "FROM godkendtebestillinger " +
+                "LEFT JOIN brugere " +
+                "ON godkendtebestillinger.brugerID = brugere.brugerID " +
+                "ORDER BY godkendtebestillinger.dato asc ;";
+        ResultSet resultSet = stmt.executeQuery(selectGodkendteBestillinger);
         return resultSet;
     }
 

@@ -184,9 +184,26 @@ public class HomeController {
         return "alleBestillinger";
     }
 
-    @GetMapping("/godkendteBestillinger")
-    public String godkendteBestillinger(){
+    @GetMapping("afvis/{id}")
+    public String afvisBestilling(@PathVariable ("id") int id) throws SQLException, ClassNotFoundException {
 
+        bestillingsService.sletBestilling(id);
+        return "redirect:/alleBestillinger";
+
+    }
+
+    @GetMapping("godkend/{id}")
+    public String godkendBestilling(@PathVariable ("id") int id) throws SQLException, ClassNotFoundException{
+
+        bestillingsService.godkendBestilling(id);
+        bestillingsService.sletBestilling(id);
+        return "redirect:/alleBestillinger";
+    }
+
+    @GetMapping("/godkendteBestillinger")
+    public String godkendteBestillinger(Model model) throws SQLException, ClassNotFoundException {
+        List<Bestilling> godkendteBestillinger = bestillingsService.hentGodkendteBestillinger();
+        model.addAttribute("godkendteBestillinger",godkendteBestillinger);
         return "godkendteBestillinger";
     }
 

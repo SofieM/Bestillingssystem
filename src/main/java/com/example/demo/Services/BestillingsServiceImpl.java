@@ -42,6 +42,50 @@ public class BestillingsServiceImpl implements BestillingsService{
 
         return bestillinger;
     }
+
+    @Override
+    public void sletBestilling(int id) throws SQLException, ClassNotFoundException {
+        bestillingRepository.deleteBestilling(id);
+    }
+
+    @Override
+    public void godkendBestilling (int id) throws SQLException, ClassNotFoundException{
+
+        ResultSet resultSet = bestillingRepository.findBestilling(id);
+
+        while (resultSet.next()) {
+
+            int bestillingsID = resultSet.getInt("bestillingsID");
+            int brugerID = resultSet.getInt("brugerID");
+            String bestilling = resultSet.getString("bestilling");
+            String dato = resultSet.getString("dato");
+
+            bestillingRepository.insertGodkendtBestilling(bestillingsID, brugerID, bestilling, dato);
+        }
+
+    }
+
+    @Override
+    public List<Bestilling> hentGodkendteBestillinger() throws SQLException, ClassNotFoundException {
+        ResultSet resultSet = bestillingRepository.selectGodkendteBestillinger();
+
+        List<Bestilling> godkendteBestillinger = new ArrayList<>();
+
+        while (resultSet.next()) {
+
+            int bestillingsID = resultSet.getInt("bestillingsID");
+            String bestilling = resultSet.getString("bestilling");
+            String dato = resultSet.getString("dato");
+            String brugerFornavn = resultSet.getString("fornavn");
+            String brugerEfternavn = resultSet.getString("efternavn");
+            int brugerTelefon = resultSet.getInt("telefon");
+            String brugerEmail = resultSet.getString("email");
+
+            godkendteBestillinger.add(new Bestilling(bestillingsID, bestilling, dato, brugerFornavn,brugerEfternavn,brugerTelefon,brugerEmail));
+        }
+
+        return godkendteBestillinger;
+    }
 }
 
 
