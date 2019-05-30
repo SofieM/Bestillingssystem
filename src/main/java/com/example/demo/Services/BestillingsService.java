@@ -15,7 +15,6 @@ public interface BestillingsService {
     public List<Bestilling> hentGodkendteBestillinger() throws SQLException, ClassNotFoundException;
     public List<Bestilling> hentBrugersBestillinger (int id) throws SQLException, ClassNotFoundException;
     public void sletBestilling(int id) throws SQLException, ClassNotFoundException;
-    public void sletGodkendtBestilling(int id) throws SQLException, ClassNotFoundException;
     public void godkendBestilling(int id) throws SQLException, ClassNotFoundException;
 
 }

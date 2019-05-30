@@ -3,7 +3,6 @@ package com.example.demo.Repositories;
 import com.example.demo.Configurations.DatabaseConfig;
 import org.springframework.stereotype.Repository;
 
-import javax.xml.crypto.Data;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -12,7 +11,7 @@ public class BestillingRepository {
 
     public void insertBestilling(int brugerID, String bestilling, String dato, String klokkeslet) throws SQLException, ClassNotFoundException {
 
-        String SQLInsertBruger = "INSERT INTO bestillinger" +
+        String insertBestilling = "INSERT INTO bestilling" +
                 "(brugerID, " +
                 "bestilling, " +
                 "dato, " +
@@ -23,25 +22,26 @@ public class BestillingRepository {
                 bestilling + "', '" +
                 dato +"', '" +
                 klokkeslet + "')";
-        SQLExecute(SQLInsertBruger);
+        SQLExecute(insertBestilling);
 
     }
 
-    public ResultSet selectAlleBestillinger() throws SQLException, ClassNotFoundException {
+    public ResultSet selectBestillinger() throws SQLException, ClassNotFoundException {
 
         Statement stmt = DatabaseConfig.getConnection().createStatement();
-        String selectAlleBestillinger= "SELECT bestillinger.bestillingsID, bestillinger.bestilling, bestillinger.dato, bestillinger.klokkeslet, brugere.fornavn, brugere.efternavn, brugere.telefon, brugere.email " +
-                "FROM bestillinger " +
-                "LEFT JOIN brugere " +
-                "ON bestillinger.brugerID = brugere.brugerID " +
-                "ORDER BY bestillinger.bestillingsID asc;";
+        String selectAlleBestillinger= "SELECT bestilling.bestillingsID, bestilling.bestilling, bestilling.dato, bestilling.klokkeslet, bestilling.status, bruger.fornavn, bruger.efternavn, bruger.telefon, bruger.email " +
+                "FROM bestilling " +
+                "LEFT JOIN bruger " +
+                "ON bestilling.brugerID = bruger.brugerID " +
+                "WHERE bestilling.status IS NULL " +
+                "ORDER BY bestilling.bestillingsID asc;";
         ResultSet resultSet = stmt.executeQuery(selectAlleBestillinger);
         return resultSet;
     }
 
     public void deleteBestilling(int id) throws SQLException, ClassNotFoundException{
 
-        String sqlDeleteBestillinger = "DELETE from bestillinger " +
+        String sqlDeleteBestillinger = "DELETE from bestilling " +
                                         "WHERE bestillingsID = " + id + ";";
         SQLExecute(sqlDeleteBestillinger);
     }
@@ -49,36 +49,29 @@ public class BestillingRepository {
     public ResultSet findBestilling (int id) throws SQLException, ClassNotFoundException{
 
         Statement stmt = DatabaseConfig.getConnection().createStatement();
-        String findBestilling = "SELECT DISTINCT bestillingsID, brugerID, bestilling, dato, klokkeslet " +
-                                "FROM bestillinger " +
+        String findBestilling = "SELECT DISTINCT bestillingsID, brugerID, bestilling, dato, klokkeslet, status " +
+                                "FROM bestilling " +
                                 "WHERE bestillingsID = " + id + ";";
         ResultSet resultSet = stmt.executeQuery(findBestilling);
         return resultSet;
     }
 
-    public void insertGodkendtBestilling(int bestillingsID, int brugerID, String bestilling, String dato, String klokkeslet) throws SQLException, ClassNotFoundException {
+    public void updateGodkendtBestilling(int bestillingsID, String status) throws SQLException, ClassNotFoundException {
 
-        String insertGodkendtBestilling = "INSERT INTO godkendtebestillinger" +
-                "(bestillingsID, " +
-                "brugerID, " +
-                "bestilling, " +
-                "dato, " +
-                "klokkeslet) " +
-
-                "VALUES " +
-                "('" + bestillingsID + "', '" + brugerID + "', '" +
-                bestilling + "', '" +
-                dato + "', '" + klokkeslet + "')";
-        SQLExecute(insertGodkendtBestilling);
+        String updateBestilling = "UPDATE bestilling " +
+                "SET " + "status = '" + status + "' " +
+                "WHERE bestillingsID = " + bestillingsID +";";
+        SQLExecute(updateBestilling);
     }
     public ResultSet selectGodkendteBestillinger() throws SQLException, ClassNotFoundException {
 
         Statement stmt = DatabaseConfig.getConnection().createStatement();
-        String selectGodkendteBestillinger= "SELECT godkendtebestillinger.bestillingsID, godkendtebestillinger.bestilling, godkendtebestillinger.dato, godkendtebestillinger.klokkeslet, brugere.fornavn, brugere.efternavn, brugere.telefon, brugere.email " +
-                "FROM godkendtebestillinger " +
-                "LEFT JOIN brugere " +
-                "ON godkendtebestillinger.brugerID = brugere.brugerID " +
-                "ORDER BY godkendtebestillinger.dato asc, godkendtebestillinger.klokkeslet asc ;";
+        String selectGodkendteBestillinger= "SELECT bestilling.bestillingsID, bestilling.bestilling, bestilling.dato, bestilling.klokkeslet, bestilling.status, bruger.fornavn, bruger.efternavn, bruger.telefon, bruger.email " +
+                "FROM bestilling " +
+                "LEFT JOIN bruger " +
+                "ON bestilling.brugerID = bruger.brugerID " +
+                "WHERE bestilling.status = 'godkendt' " +
+                "ORDER BY bestilling.dato asc, bestilling.klokkeslet asc ;";
         ResultSet resultSet = stmt.executeQuery(selectGodkendteBestillinger);
         return resultSet;
     }
@@ -87,18 +80,11 @@ public class BestillingRepository {
 
         Statement stmt = DatabaseConfig.getConnection().createStatement();
         String findBrugersBestillinger = "SELECT bestillingsID, brugerID, bestilling, dato, klokkeslet " +
-                                         "FROM godkendtebestillinger " +
-                                         "WHERE brugerID = " + id + " " +
+                                         "FROM bestilling " +
+                                         "WHERE brugerID = " + id + " AND status = 'godkendt' " +
                                          "ORDER BY dato asc;";
         ResultSet resultSet = stmt.executeQuery(findBrugersBestillinger);
         return resultSet;
-    }
-
-    public void deleteGodkendtBestilling(int id) throws SQLException, ClassNotFoundException{
-
-        String sqlDeleteGodkendtBestilling = "DELETE from godkendtebestillinger " +
-                "WHERE bestillingsID = " + id + ";";
-        SQLExecute(sqlDeleteGodkendtBestilling);
     }
 
     public void SQLExecute(String SQL) throws SQLException, ClassNotFoundException {

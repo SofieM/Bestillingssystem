@@ -2,37 +2,37 @@ package com.example.demo.Models;
 
 public class Menu {
 
-    public int itemID;
-    public String itemNavn;
-    public int itemPris;
+    public int vareID;
+    public String vareNavn;
+    public int varePris;
 
-    public Menu(int itemID, String itemNavn, int itemPris) {
-        this.itemID = itemID;
-        this.itemNavn = itemNavn;
-        this.itemPris = itemPris;
+    public Menu(int vareID, String vareNavn, int itemPris) {
+        this.vareID = vareID;
+        this.vareNavn = vareNavn;
+        this.varePris = itemPris;
     }
 
-    public int getItemID() {
-        return itemID;
+    public int getVareID() {
+        return vareID;
     }
 
-    public void setItemID(int itemID) {
-        this.itemID = itemID;
+    public void setVareID(int vareID) {
+        this.vareID = vareID;
     }
 
-    public String getItemNavn() {
-        return itemNavn;
+    public String getVareNavn() {
+        return vareNavn;
     }
 
-    public void setItemNavn(String itemNavn) {
-        this.itemNavn = itemNavn;
+    public void setVareNavn(String vareNavn) {
+        this.vareNavn = vareNavn;
     }
 
-    public int getItemPris() {
-        return itemPris;
+    public int getVarePris() {
+        return varePris;
     }
 
-    public void setItemPris(int itemPris) {
-        this.itemPris = itemPris;
+    public void setVarePris(int varePris) {
+        this.varePris = varePris;
     }
 }

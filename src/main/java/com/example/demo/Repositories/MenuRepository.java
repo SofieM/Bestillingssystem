@@ -13,11 +13,11 @@ public class MenuRepository {
     public ResultSet selectMenu() throws SQLException, ClassNotFoundException {
 
         Statement stmt = DatabaseConfig.getConnection().createStatement();
-        String selectMenu = "SELECT menuItems.itemID, menuItems.navn, priser.pris " +
-                            "FROM menuItems " +
-                            "LEFT JOIN priser " +
-                            "ON menuItems.prisID = priser.prisID " +
-                            "ORDER BY menuItems.ItemID asc;";
+        String selectMenu = "SELECT vare.vareID, vare.navn, pris.pris " +
+                            "FROM vare " +
+                            "LEFT JOIN pris " +
+                            "ON vare.prisID = pris.prisID " +
+                            "ORDER BY vare.vareID asc;";
         ResultSet resultSet = stmt.executeQuery(selectMenu);
         return resultSet;
     }

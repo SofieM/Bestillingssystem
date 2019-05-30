@@ -16,13 +16,14 @@ public class Bestilling {
     private String dato;
     @DateTimeFormat (pattern = "hh:mm")
     private String klokkeslet;
+    private String status;
 
-//    private int itemID;
+//    private int vareID;
 //    private int amount;
 
-//    public Bestilling(int brugerID, int itemID) {
+//    public Bestilling(int brugerID, int vareID) {
 //        this.brugerID = brugerID;
-//        this.itemID = itemID;
+//        this.vareID = vareID;
 //    }
 
 
@@ -51,15 +52,17 @@ public class Bestilling {
     public Bestilling() {
     }
 
-    public Bestilling(int bestillingsID, String bestilling, String dato, String klokkeslet, String brugerFornavn, String brugerEfternavn, int brugerTelefon, String brugerEmail) {
+    public Bestilling(int bestillingsID, String bestilling, String dato, String klokkeslet, String status, String brugerFornavn, String brugerEfternavn, int brugerTelefon, String brugerEmail) {
         this.bestillingsID = bestillingsID;
         this.bestilling = bestilling;
         this.dato = dato;
         this.klokkeslet = klokkeslet;
+        this.status = status;
         this.brugerFornavn = brugerFornavn;
         this.brugerEfternavn = brugerEfternavn;
         this.brugerTelefon = brugerTelefon;
         this.brugerEmail = brugerEmail;
+
     }
 
     public String getKlokkeslet() {
@@ -126,8 +129,8 @@ public class Bestilling {
         this.dato = dato;
     }
 
-//    public Bestilling(int itemID, int amount) {
-//        this.itemID = itemID;
+//    public Bestilling(int vareID, int amount) {
+//        this.vareID = vareID;
 //        this.amount = amount;
 //    }
 
@@ -147,11 +150,19 @@ public class Bestilling {
         this.brugerID = brugerID;
     }
 
-//    public int getItemID() {
-//        return itemID;
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    //    public int getItemID() {
+//        return vareID;
 //    }
 //
-//    public void setItemID(int itemID) {
-//        this.itemID = itemID;
+//    public void setItemID(int vareID) {
+//        this.vareID = vareID;
 //    }
 }

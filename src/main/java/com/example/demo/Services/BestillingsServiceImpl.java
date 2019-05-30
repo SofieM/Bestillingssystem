@@ -23,7 +23,7 @@ public class BestillingsServiceImpl implements BestillingsService {
 
     @Override
     public List<Bestilling> hentAlleBestillinger() throws SQLException, ClassNotFoundException {
-        ResultSet resultSet = bestillingRepository.selectAlleBestillinger();
+        ResultSet resultSet = bestillingRepository.selectBestillinger();
 
         List<Bestilling> bestillinger = new ArrayList<>();
 
@@ -33,12 +33,14 @@ public class BestillingsServiceImpl implements BestillingsService {
             String bestilling = resultSet.getString("bestilling");
             String dato = resultSet.getString("dato");
             String klokkeslet = resultSet.getString("klokkeslet");
+            String status = resultSet.getString("status");
             String brugerFornavn = resultSet.getString("fornavn");
             String brugerEfternavn = resultSet.getString("efternavn");
             int brugerTelefon = resultSet.getInt("telefon");
             String brugerEmail = resultSet.getString("email");
 
-            bestillinger.add(new Bestilling(bestillingsID, bestilling, dato, klokkeslet, brugerFornavn, brugerEfternavn, brugerTelefon, brugerEmail));
+
+            bestillinger.add(new Bestilling(bestillingsID, bestilling, dato, klokkeslet, status, brugerFornavn, brugerEfternavn, brugerTelefon, brugerEmail));
         }
 
         return bestillinger;
@@ -57,12 +59,9 @@ public class BestillingsServiceImpl implements BestillingsService {
         while (resultSet.next()) {
 
             int bestillingsID = resultSet.getInt("bestillingsID");
-            int brugerID = resultSet.getInt("brugerID");
-            String bestilling = resultSet.getString("bestilling");
-            String dato = resultSet.getString("dato");
-            String klokkeslet = resultSet.getString("klokkeslet");
+            String status = "godkendt";
 
-            bestillingRepository.insertGodkendtBestilling(bestillingsID, brugerID, bestilling, dato, klokkeslet);
+            bestillingRepository.updateGodkendtBestilling(bestillingsID, status);
         }
 
     }
@@ -79,12 +78,13 @@ public class BestillingsServiceImpl implements BestillingsService {
             String bestilling = resultSet.getString("bestilling");
             String dato = resultSet.getString("dato");
             String klokkeslet = resultSet.getString("klokkeslet");
+            String status = resultSet.getString("status");
             String brugerFornavn = resultSet.getString("fornavn");
             String brugerEfternavn = resultSet.getString("efternavn");
             int brugerTelefon = resultSet.getInt("telefon");
             String brugerEmail = resultSet.getString("email");
 
-            godkendteBestillinger.add(new Bestilling(bestillingsID, bestilling, dato, klokkeslet, brugerFornavn, brugerEfternavn, brugerTelefon, brugerEmail));
+            godkendteBestillinger.add(new Bestilling(bestillingsID, bestilling, dato, klokkeslet, status, brugerFornavn, brugerEfternavn, brugerTelefon, brugerEmail));
         }
 
         return godkendteBestillinger;
@@ -111,11 +111,6 @@ public class BestillingsServiceImpl implements BestillingsService {
 
         return brugersBestillinger;
 
-    }
-
-    @Override
-    public void sletGodkendtBestilling(int id) throws SQLException, ClassNotFoundException {
-        bestillingRepository.deleteGodkendtBestilling(id);
     }
 
 }

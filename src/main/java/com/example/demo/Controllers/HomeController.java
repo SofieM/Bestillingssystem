@@ -199,7 +199,7 @@ public class HomeController {
     public String godkendBestilling(@PathVariable ("id") int id) throws SQLException, ClassNotFoundException{
 
         bestillingsService.godkendBestilling(id);
-        bestillingsService.sletBestilling(id);
+
         return "redirect:/alleBestillinger";
     }
 
@@ -213,7 +213,7 @@ public class HomeController {
     @GetMapping("afslut/{id}")
     public String afslutBestilling(@PathVariable ("id") int id) throws SQLException, ClassNotFoundException {
 
-        bestillingsService.sletGodkendtBestilling(id);
+        bestillingsService.sletBestilling(id);
         return "redirect:/godkendteBestillinger";
 
     }

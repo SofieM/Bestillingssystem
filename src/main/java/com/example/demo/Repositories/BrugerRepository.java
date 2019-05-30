@@ -27,7 +27,7 @@ public void createBrugerTabel() throws SQLException, ClassNotFoundException {
 
 public void insertBruger(String brugernavn, String password, String fornavn, String efternavn, String adresse, int telefon, String email) throws SQLException, ClassNotFoundException {
 
-    String SQLInsertBruger = "INSERT INTO brugere" +
+    String SQLInsertBruger = "INSERT INTO bruger" +
             "(brugernavn, " +
             "password, " +
             "fornavn, " +
@@ -52,7 +52,7 @@ public void insertBruger(String brugernavn, String password, String fornavn, Str
 public ResultSet selectBrugerLogin() throws SQLException, ClassNotFoundException {
 
     Statement stmt = DatabaseConfig.getConnection().createStatement();
-    String SQLSelectBrugerLogin = "SELECT brugernavn, password from brugere";
+    String SQLSelectBrugerLogin = "SELECT brugernavn, password from bruger";
     ResultSet resultSet = stmt.executeQuery(SQLSelectBrugerLogin);
     return resultSet;
 }
@@ -60,7 +60,7 @@ public ResultSet selectBrugerLogin() throws SQLException, ClassNotFoundException
 public ResultSet selectBruger(Bruger bruger) throws SQLException, ClassNotFoundException{
 
     Statement stmt = DatabaseConfig.getConnection().createStatement();
-    String selectBruger = "SELECT brugerID, brugernavn, password, fornavn, efternavn, adresse, telefon, email from brugere WHERE brugernavn = '" + bruger.getBrugernavn() + "' AND password = '" + bruger.getPassword()+"'";
+    String selectBruger = "SELECT brugerID, brugernavn, password, fornavn, efternavn, adresse, telefon, email from bruger WHERE brugernavn = '" + bruger.getBrugernavn() + "' AND password = '" + bruger.getPassword()+"'";
     ResultSet resultSet = stmt.executeQuery(selectBruger);
     return resultSet;
 }
