@@ -2,7 +2,6 @@ package com.example.demo.Services;
 
 import com.example.demo.Models.Bestilling;
 import com.example.demo.Repositories.BestillingRepository;
-import com.mysql.cj.api.mysqla.result.Resultset;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -26,23 +25,8 @@ public class BestillingsServiceImpl implements BestillingsService {
     public List<Bestilling> hentAlleBestillinger() throws SQLException, ClassNotFoundException {
         ResultSet resultSet = bestillingRepository.selectBestillinger();
 
-        List<Bestilling> bestillinger = test(resultSet);
+        List<Bestilling> bestillinger = indlæsBestilling(resultSet);
 
-//        while (resultSet.next()) {
-//
-//            int bestillingsID = resultSet.getInt("bestillingsID");
-//            String bestilling = resultSet.getString("bestilling");
-//            String dato = resultSet.getString("dato");
-//            String klokkeslet = resultSet.getString("klokkeslet");
-//            String status = resultSet.getString("status");
-//            String brugerFornavn = resultSet.getString("fornavn");
-//            String brugerEfternavn = resultSet.getString("efternavn");
-//            int brugerTelefon = resultSet.getInt("telefon");
-//            String brugerEmail = resultSet.getString("email");
-//
-//
-//            bestillinger.add(new Bestilling(bestillingsID, bestilling, dato, klokkeslet, status, brugerFornavn, brugerEfternavn, brugerTelefon, brugerEmail));
-//        }
         return bestillinger;
     }
 
@@ -63,30 +47,13 @@ public class BestillingsServiceImpl implements BestillingsService {
 
             bestillingRepository.updateGodkendtBestilling(bestillingsID, status);
         }
-
     }
 
     @Override
     public List<Bestilling> hentGodkendteBestillinger() throws SQLException, ClassNotFoundException {
         ResultSet resultSet = bestillingRepository.selectGodkendteBestillinger();
 
-        List<Bestilling> godkendteBestillinger = test(resultSet);
-
-
-//        while (resultSet.next()) {
-//
-//            int bestillingsID = resultSet.getInt("bestillingsID");
-//            String bestilling = resultSet.getString("bestilling");
-//            String dato = resultSet.getString("dato");
-//            String klokkeslet = resultSet.getString("klokkeslet");
-//            String status = resultSet.getString("status");
-//            String brugerFornavn = resultSet.getString("fornavn");
-//            String brugerEfternavn = resultSet.getString("efternavn");
-//            int brugerTelefon = resultSet.getInt("telefon");
-//            String brugerEmail = resultSet.getString("email");
-//
-//            godkendteBestillinger.add(new Bestilling(bestillingsID, bestilling, dato, klokkeslet, status, brugerFornavn, brugerEfternavn, brugerTelefon, brugerEmail));
-//        }
+        List<Bestilling> godkendteBestillinger = indlæsBestilling(resultSet);
 
         return godkendteBestillinger;
     }
@@ -114,7 +81,7 @@ public class BestillingsServiceImpl implements BestillingsService {
 
     }
 
-    public List<Bestilling> test(ResultSet resultSet) throws SQLException {
+    public List<Bestilling> indlæsBestilling(ResultSet resultSet) throws SQLException {
 
 
         List<Bestilling> bestillinger = new ArrayList<>();

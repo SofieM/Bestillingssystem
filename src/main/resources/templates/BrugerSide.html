@@ -22,14 +22,6 @@
             color: white;
         }
 
-        .fa-shopping-cart {
-            font-size: 24px;
-            display: block;
-            margin-left: auto;
-            margin-right: auto;
-            width: 40%;
-
-        }
     </style>
 </head>
 <body>
@@ -39,8 +31,8 @@
 
 <div th:insert="fragments/sidebarBruger :: sidebarBruger"></div>
 
-    <div id="wrapper">
-<div class="container">
+<div id="wrapper">
+    <div class="container">
 
     <h1>Høstergaard Smørrebrød</h1>
 
@@ -51,49 +43,10 @@
     <p th:text ="'Adresse: ' + ${session.adresse}" th:unless="${session==null}"></p>
     <p th:text ="'Telefon: ' + ${session.telefon}" th:unless="${session==null}"></p>
     <p th:text ="'Email: ' + ${session.email}" th:unless="${session==null}"></p>
-    <!--<table class ="table table-striped table-bordered table-hover">-->
-     <!--<thead>-->
-     <!--<tr>-->
-         <!--<th></th>-->
-         <!--<th>ID</th>-->
-         <!--<th>Fornavn</th>-->
-         <!--<th>Efternavn</th>-->
-     <!--</tr>-->
-     <!--</thead>-->
-        <!--<tbody>-->
-    <!--<tr th:each ="bruger : ${brugere}">-->
-        <!--<td th:number="${bruger.brugerID}"/>-->
-        <!--<td th:text="${bruger.fornavn}"/>-->
-        <!--<td th:text="${bruger.efternavn}"/>-->
-        <!--<td th:text="${bruger.adresse}"/>-->
-        <!--<td th:number="${bruger.telefon}"/>-->
-        <!--<td th:text="${bruger.email}"/>-->
-    <!--</tr>-->
-        <!--</tbody>-->
-    <!--</table>-->
 
+    </div>
 
-    <!--<table class="table table-striped table-bordered table-hover">-->
-        <!--<thead>-->
-        <!--<tr>-->
-            <!--<th></th>-->
-            <!--<th>Pris</th>-->
-            <!--<th>Tilføj til kurv </th>-->
-        <!--</tr>-->
-        <!--</thead>-->
-        <!--<tbody>-->
-        <!--<tr th:each="menu: ${menu}">-->
-            <!--<td th:text="${menu.vareNavn}"/>-->
-            <!--<td th:text="${menu.varePris}"/>-->
-            <!--<td>-->
-            <!--<i class="fa fa-shopping-cart" ></i>-->
-            <!--</td>-->
-        <!--</tr>-->
-        <!--</tbody>-->
-    <!--</table>-->
-    <!--</div>-->
-<!--</div>-->
-
+</div>
 
 </body>
 </html>

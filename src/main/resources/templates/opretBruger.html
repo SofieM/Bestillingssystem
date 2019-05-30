@@ -3,6 +3,26 @@
 <head>
     <meta charset="UTF-8">
     <title>Opret Bruger</title>
+
+    <style>
+
+        #opretBruger{
+            margin-top: 25px;
+            float: left;
+        }
+
+        #opretBruger label{
+
+            margin: 10px;
+        }
+
+        #opretBruger input{
+
+            margin-top: 10px;
+            margin-left: 20px;
+        }
+
+    </style>
 </head>
 <body>
 <header>
@@ -10,10 +30,9 @@
 </header>
 
 <section>
-
+    <h3>Felter med * skal udfyldes </h3>
     <form method="post" th:action="@{/opretBruger}" id="opretBruger">
-        <p>Felter med * skal udfyldes</p>
-        <br>
+
 
         <label> Brugernavn* </label>
         <input type="text" name="brugernavn" placeholder="brugernavn" id="brugernavn" th:field="${bruger.brugernavn}">

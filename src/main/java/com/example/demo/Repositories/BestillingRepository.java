@@ -23,7 +23,6 @@ public class BestillingRepository {
                 dato +"', '" +
                 klokkeslet + "')";
         SQLExecute(insertBestilling);
-
     }
 
     public ResultSet selectBestillinger() throws SQLException, ClassNotFoundException {

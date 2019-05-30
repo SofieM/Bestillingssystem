@@ -17,8 +17,6 @@ import org.springframework.web.context.request.WebRequest;
 
 import javax.servlet.http.HttpSession;
 import java.sql.SQLException;
-import java.sql.SQLOutput;
-import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -39,46 +37,8 @@ public class HomeController {
         return "home";
     }
 
-//    @GetMapping("/order/{id}")
-//    public String newOrder(@PathVariable("id") Integer id,  HttpSession session) {
-//
-//        Object order = session.getAttribute(id.toString());
-//        if(order instanceof Integer){
-//
-//            int amount = (int) order;
-//            for (int i = 0; i < ; i++) {
-//                amount++;
-//                System.out.println(session.getAttribute(id.toString()));
-//                System.out.println(id);
-//                System.out.println("amount: " + amount);
-//            }
-//
-////            List<Bestilling> bestilling = new ArrayList<>();
-////            bestilling.add(new Bestilling(id, amount));
-////
-////            for (int i = 0; i < bestilling.size() ; i++) {
-////
-////                System.out.println("ID" + bestilling.get(i).getItemID());
-////                System.out.println("Amount" + bestilling.get(i).getAmount());
-////
-////            }
-//        } else {
-//            // DEN IKKE FINDES
-//            session.setAttribute(id.toString(), 1);
-//            System.out.println("findes ikke");
-//            System.out.println(session.getAttribute(id.toString()));
-//        }
-//
-//        return "redirect:/lavBestilling";
-//    }
-
-
-
     @GetMapping("/login")
-    public String login(Model model) throws SQLException, ClassNotFoundException {
-
-        //List<Bruger> brugere = brugerService.findBruger(bruger);
-        //model.addAttribute("brugere", brugere);
+    public String login(){
 
         return "login";
     }
@@ -105,8 +65,6 @@ public class HomeController {
             session.setAttribute("telefon",bruger.getTelefon());
             session.setAttribute("email", bruger.getEmail());
 
-
-            //session.setAttribute("bruger", bruger);
             return "redirect:/BrugerSide";
         }
         else{
@@ -139,7 +97,7 @@ public class HomeController {
     }
 
     @GetMapping("/lavBestilling")
-    public String lavBestilling(Model model, Bestilling bestilling) throws SQLException, ClassNotFoundException {
+    public String lavBestilling(Model model) throws SQLException, ClassNotFoundException {
         List<Menu> menu = menuService.hentMenu();
         model.addAttribute("menu", menu);
         model.addAttribute("bestilling", new Bestilling());
@@ -164,19 +122,8 @@ public class HomeController {
     }
 
     @GetMapping("/adminSide")
-    public String adminSide(HttpSession session){
+    public String adminSide(){
 
-//        try {
-//            Object v = session.getAttribute("logged_in");
-//            if(v instanceof Boolean && (Boolean) v) {
-//
-//                return "adminSide";
-//            } else {
-//                return "redirect:/";
-//            }
-//        } catch (Exception ee) {
-//            return "redirect:/";
-//        }
         return "adminSide";
     }
 
@@ -192,7 +139,6 @@ public class HomeController {
 
         bestillingsService.sletBestilling(id);
         return "redirect:/alleBestillinger";
-
     }
 
     @GetMapping("godkend/{id}")
@@ -217,6 +163,5 @@ public class HomeController {
         return "redirect:/godkendteBestillinger";
 
     }
-
 
 }

@@ -6,13 +6,6 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <style>
 
-        #buttomBestil{
-            padding: 5px;
-            margin: 20px;
-            background-color: green;
-            margin-left: 450px;
-
-        }
         #nyBestilling {
             margin-top: 50px;
             float: right;
@@ -38,14 +31,6 @@
             color: white;
         }
 
-        .fa-shopping-cart {
-            font-size: 24px;
-            display: block;
-            margin-left: auto;
-            margin-right: auto;
-            width: 40%;
-
-        }
     </style>
 </head>
 <body>
@@ -90,56 +75,23 @@
         <th></th>
         <th>Pris</th>
 
-        <!--<th>-->
-          <!--<i class="fa fa-shopping-cart" ></i>-->
-        <!--</th>-->
-
     </tr>
     </thead>
 
     <tbody>
     <div>
     <tr th:each="menu: ${menu}">
-        <!--<td th:number="${menu.vareID}">-->
-            <!--&lt;!&ndash;<a th:href="@{'/order/' + ${menu.vareID}}">+</a></td>&ndash;&gt;-->
+
         <td th:text="${menu.vareID}"/>
         <td th:text="${menu.vareNavn}"/>
         <td th:text="${menu.varePris}"/>
-        <!--<td>-->
-            <!--<input type="number">-->
-        <!--</td>-->
+
     </tr>
     </div>
 
     </tbody>
 
 </table>
-
-
-
-
-    <!--<form th:action="@{/lavBestilling}" method="post" id="nyBestilling" >-->
-
-
-        <!--<label>Skriv din bestilling her:</label>-->
-        <!--<input type="text" name="brugerID" th:field="${session.brugerID}" th:unless="${session==null}"/>-->
-        <!--<br>-->
-        <!--<label>Skriv din bestilling her:</label>-->
-        <!--<textarea type="text" name="Bestilling" placeholder="Din bestilling" th:field="${bestilling.bestilling}"></textarea>-->
-        <!--<br>-->
-        <!--<label>Dato for afhenting</label>-->
-        <!--<input type="date" name="dato" placeholder="dato" id="dato" th:field="${bestilling.dato}">-->
-        <!--<br>-->
-
-
-        <!--<input type="submit" value="Send Bestilling">-->
-    <!--</form>-->
-
-    <!--<div>-->
-        <!--<button  id="buttomBestil" type="submit"> Bestil </button>-->
-    <!--</div>-->
-    <!--</form>-->
-
 
 </div>
 
