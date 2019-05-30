@@ -7,19 +7,34 @@
     <style>
 
         #opretBruger{
-            margin-top: 25px;
+            /*margin-top: 25px;*/
             float: left;
+
         }
 
         #opretBruger label{
 
             margin: 10px;
+
         }
 
         #opretBruger input{
 
             margin-top: 10px;
-            margin-left: 20px;
+            margin-left: 30px;
+            padding: 10px;
+            display: block;
+
+
+        }
+        #wrapper{
+            margin-left: 40px;
+        }
+        #submitbutton{
+            width: 150px;
+            padding: 10px;
+            background-color: #4CAF50;
+
         }
 
     </style>
@@ -29,20 +44,24 @@
     <div th:insert="fragments/header :: header"></div>
 </header>
 
+<div id="wrapper">
+
+
+<h1>Opret bruger </h1>
+    <h3>Ale felter skal udfyldes </h3>
 <section>
-    <h3>Felter med * skal udfyldes </h3>
     <form method="post" th:action="@{/opretBruger}" id="opretBruger">
 
 
-        <label> Brugernavn* </label>
+        <label> Brugernavn </label>
         <input type="text" name="brugernavn" placeholder="brugernavn" id="brugernavn" th:field="${bruger.brugernavn}">
         <br>
 
-        <label> Password* </label>
+        <label> Password </label>
         <input type="password" name="password" placeholder="password" id="password" th:field="${bruger.password}">
         <br>
 
-        <label> Fornavn* </label>
+        <label> Fornavn </label>
         <input type="text" name="fornavn" placeholder="Fornavn" id="fornavn" th:field="${bruger.fornavn}">
         <br>
 
@@ -54,7 +73,7 @@
         <input type="text" name="adresse" placeholder="Adresse" id="adresse" th:field="${bruger.adresse}">
         <br>
 
-        <label> Telefon* </label>
+        <label> Telefon </label>
         <input type="number" name="telefon" placeholder="Telefon" id="telefon" th:field="${bruger.telefon}">
         <br>
 
@@ -62,10 +81,11 @@
         <input type="email" name="email" placeholder="Email" id="email" th:field="${bruger.email}">
         <br>
 
-        <input type="submit" value="Opret Bruger" >
+        <input id="submitbutton" type="submit" value="Opret Bruger" >
+        <br>
 
     </form>
 </section>
-
+</div>
 </body>
 </html>
