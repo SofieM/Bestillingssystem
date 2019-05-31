@@ -18,7 +18,7 @@ import org.springframework.web.context.request.WebRequest;
 import javax.servlet.http.HttpSession;
 import java.sql.SQLException;
 import java.util.List;
-
+//lavet af Sofie og Christine
 @Controller
 public class HomeController {
 
@@ -32,8 +32,9 @@ public class HomeController {
     BestillingsService bestillingsService;
 
     @GetMapping("/")
-    public String home(){
-
+    public String home(Model model) throws SQLException, ClassNotFoundException {
+        List<Menu> menu = menuService.hentMenu();
+        model.addAttribute("menu", menu);
         return "home";
     }
 
@@ -53,7 +54,9 @@ public class HomeController {
 
             return "redirect:/adminSide";
         }
-
+        //finder Bruger-attributter og gemmer dem som sessions-attributter, så brugerens informationer er
+        //tilgængelige i hele sessionen
+        //sessions-attributterne benyttes når brugeren laver en ny bestilling, så man ved hvilken bruger, bestillingen er lavet af
         if (brugerService.validerBruger(bruger)) {
 
             session.setAttribute("brugerId",bruger.getBrugerID());
@@ -107,7 +110,7 @@ public class HomeController {
 
     @PostMapping("/lavBestilling")
     public String lavBestilling(@ModelAttribute Bestilling bestilling, @ModelAttribute(name="bruger") Bruger bruger, HttpSession session) throws SQLException, ClassNotFoundException {
-        int brugerID = Integer.parseInt(session.getAttribute("brugerId").toString());
+        int brugerID = Integer.parseInt(session.getAttribute("brugerId").toString()); //parser sessions-attributtet (som er et objekt) til en int
         bestillingsService.tilføjBestilling(brugerID,bestilling);
         return "redirect:/lavBestilling";
     }

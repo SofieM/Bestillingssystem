@@ -9,9 +9,11 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
+//lavet af Sofie og Christine
 @Repository
 public class BrugerRepository {
 
+//opretter en bruger-tabel (er kun eksekveret én gang, for at få oprettet vores buger-tabel)
 public void createBrugerTabel() throws SQLException, ClassNotFoundException {
 
     String SQLCreateBruger = "CREATE TABLE IF NOT EXISTS brugere" +
@@ -25,6 +27,7 @@ public void createBrugerTabel() throws SQLException, ClassNotFoundException {
             SQLExecute(SQLCreateBruger);
 }
 
+//indsætter en ny række i bruger-tabellen, med værdierne for en den nyoprettede bruger
 public void insertBruger(String brugernavn, String password, String fornavn, String efternavn, String adresse, int telefon, String email) throws SQLException, ClassNotFoundException {
 
     String SQLInsertBruger = "INSERT INTO bruger" +
@@ -49,6 +52,7 @@ public void insertBruger(String brugernavn, String password, String fornavn, Str
 
 }
 
+//henter en enkelt bruger, ud fra brugernavn og password
 public ResultSet selectBruger(Bruger bruger) throws SQLException, ClassNotFoundException{
 
     Statement stmt = DatabaseConfig.getConnection().createStatement();

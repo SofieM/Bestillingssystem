@@ -2,6 +2,7 @@ package com.example.demo.Models;
 
 import org.springframework.boot.autoconfigure.domain.EntityScan;
 
+//lavet af Sofie og Christine
 @EntityScan
 public class Bruger {
     private int brugerID;

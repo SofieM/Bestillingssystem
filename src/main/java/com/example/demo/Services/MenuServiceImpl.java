@@ -1,6 +1,6 @@
 package com.example.demo.Services;
 
-import com.example.demo.Models.Bruger;
+
 import com.example.demo.Models.Menu;
 import com.example.demo.Repositories.MenuRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +11,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+//lavet af Sofie og Christine
 @Service
 public class MenuServiceImpl implements MenuService {
 

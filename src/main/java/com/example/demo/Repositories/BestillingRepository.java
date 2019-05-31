@@ -6,9 +6,12 @@ import org.springframework.stereotype.Repository;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+
+//lavet af Sofie og Christine
 @Repository
 public class BestillingRepository {
 
+    //indsætter en ny bestilling i bestilling-tabellen i vores database
     public void insertBestilling(int brugerID, String bestilling, String dato, String klokkeslet) throws SQLException, ClassNotFoundException {
 
         String insertBestilling = "INSERT INTO bestilling" +
@@ -25,6 +28,9 @@ public class BestillingRepository {
         SQLExecute(insertBestilling);
     }
 
+    //henter alle rækker fra bestilling-tabellen
+    //joiner de to tabeller bestilling og bruger ved hjælp af brugerID
+    //så bestillingerne er knyttet sammen med information om brugeren, der har lavet bestillingerne
     public ResultSet selectBestillinger() throws SQLException, ClassNotFoundException {
 
         Statement stmt = DatabaseConfig.getConnection().createStatement();
@@ -38,6 +44,7 @@ public class BestillingRepository {
         return resultSet;
     }
 
+    //sletter en bestilling ud fra bestillingsID
     public void deleteBestilling(int id) throws SQLException, ClassNotFoundException{
 
         String sqlDeleteBestillinger = "DELETE from bestilling " +
@@ -45,6 +52,7 @@ public class BestillingRepository {
         SQLExecute(sqlDeleteBestillinger);
     }
 
+    //finder en specifik bestilling ud fra bestillingsID
     public ResultSet findBestilling (int id) throws SQLException, ClassNotFoundException{
 
         Statement stmt = DatabaseConfig.getConnection().createStatement();
@@ -55,6 +63,7 @@ public class BestillingRepository {
         return resultSet;
     }
 
+    //opdaterer status-kolonnen i bestilling-tabellen med værdien "godkendt"
     public void updateGodkendtBestilling(int bestillingsID, String status) throws SQLException, ClassNotFoundException {
 
         String updateBestilling = "UPDATE bestilling " +
@@ -63,6 +72,9 @@ public class BestillingRepository {
         SQLExecute(updateBestilling);
     }
 
+    //henter alle bestillinger som har værdien "godkendt" i status-kolonnen i bestillings-tabellen
+    //joiner de to tabeller bestilling og bruger ved hjælp af brugerID
+    //så bestillingerne er knyttet sammen med information om brugeren, der har lavet bestillingerne
     public ResultSet selectGodkendteBestillinger() throws SQLException, ClassNotFoundException {
 
         Statement stmt = DatabaseConfig.getConnection().createStatement();
@@ -76,6 +88,7 @@ public class BestillingRepository {
         return resultSet;
     }
 
+    //henter alle bestillinger som har værdien "godkendt" i status-kolonnen i bestillings-tabellen for en enkelt bruger ud fra brugerID
     public ResultSet findBrugersBestillinger(int id) throws SQLException, ClassNotFoundException{
 
         Statement stmt = DatabaseConfig.getConnection().createStatement();

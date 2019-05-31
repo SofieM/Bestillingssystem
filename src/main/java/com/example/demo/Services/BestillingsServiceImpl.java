@@ -9,6 +9,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+
+//lavet af Sofie og Christine
 @Service
 public class BestillingsServiceImpl implements BestillingsService {
 
@@ -81,6 +83,9 @@ public class BestillingsServiceImpl implements BestillingsService {
 
     }
 
+    //læser et resultset igennem og lægger hver værdi ind i en ArrayList
+    //kaldes fra hentAlleBestillinger og hentGodkendte bestillinger
+    //lavet for at undgå redundant kode i de to metoder
     public List<Bestilling> indlæsBestilling(ResultSet resultSet) throws SQLException {
 
 

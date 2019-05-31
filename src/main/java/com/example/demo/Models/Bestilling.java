@@ -2,6 +2,8 @@ package com.example.demo.Models;
 
 import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.format.annotation.DateTimeFormat;
+
+//lavet af Sofie og Christine
 @EntityScan
 public class Bestilling {
 

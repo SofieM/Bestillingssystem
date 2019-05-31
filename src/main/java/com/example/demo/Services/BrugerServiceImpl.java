@@ -10,6 +10,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+//lavet af Sofie og Christine
 @Service
 public class BrugerServiceImpl implements BrugerService{
 
