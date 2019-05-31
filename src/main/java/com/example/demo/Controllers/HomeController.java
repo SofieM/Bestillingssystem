@@ -74,14 +74,14 @@ public class HomeController {
     }
 
     @GetMapping("/opretBruger")
-    public String opretBruger(Model model){
+    public String opretBruger(Model model) throws SQLException, ClassNotFoundException {
 
         model.addAttribute("bruger", new Bruger());
         return "opretBruger";
     }
 
     @PostMapping("/opretBruger")
-    public String opretBruger(@ModelAttribute Bruger bruger) throws SQLException, ClassNotFoundException {
+    public String opretBruger(@ModelAttribute Bruger bruger, Model model) throws SQLException, ClassNotFoundException {
 
         brugerService.opretBruger(bruger);
         return "redirect:/login";

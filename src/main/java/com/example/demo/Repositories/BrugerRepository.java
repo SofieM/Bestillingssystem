@@ -49,14 +49,6 @@ public void insertBruger(String brugernavn, String password, String fornavn, Str
 
 }
 
-public ResultSet selectBrugerLogin() throws SQLException, ClassNotFoundException {
-
-    Statement stmt = DatabaseConfig.getConnection().createStatement();
-    String SQLSelectBrugerLogin = "SELECT brugernavn, password from bruger";
-    ResultSet resultSet = stmt.executeQuery(SQLSelectBrugerLogin);
-    return resultSet;
-}
-
 public ResultSet selectBruger(Bruger bruger) throws SQLException, ClassNotFoundException{
 
     Statement stmt = DatabaseConfig.getConnection().createStatement();
@@ -64,15 +56,6 @@ public ResultSet selectBruger(Bruger bruger) throws SQLException, ClassNotFoundE
     ResultSet resultSet = stmt.executeQuery(selectBruger);
     return resultSet;
 }
-
-public ResultSet selectBrugerMedId (int id) throws SQLException, ClassNotFoundException{
-
-    Statement stmt = DatabaseConfig.getConnection().createStatement();
-    String selectBrugerID ="SELECT * from bruger WHERE brugerID = " + id;
-    ResultSet resultSet =stmt.executeQuery(selectBrugerID);
-    return resultSet;
-}
-
 
 public void SQLExecute(String SQL) throws SQLException, ClassNotFoundException {
 

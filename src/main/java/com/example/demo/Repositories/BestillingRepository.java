@@ -62,6 +62,7 @@ public class BestillingRepository {
                 "WHERE bestillingsID = " + bestillingsID +";";
         SQLExecute(updateBestilling);
     }
+
     public ResultSet selectGodkendteBestillinger() throws SQLException, ClassNotFoundException {
 
         Statement stmt = DatabaseConfig.getConnection().createStatement();

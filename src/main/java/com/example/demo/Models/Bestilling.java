@@ -18,14 +18,6 @@ public class Bestilling {
     private String klokkeslet;
     private String status;
 
-//    private int vareID;
-//    private int amount;
-
-//    public Bestilling(int brugerID, int vareID) {
-//        this.brugerID = brugerID;
-//        this.vareID = vareID;
-//    }
-
 
     public Bestilling(int brugerID, String bestilling, String dato, String klokkeslet) {
 
@@ -129,19 +121,6 @@ public class Bestilling {
         this.dato = dato;
     }
 
-//    public Bestilling(int vareID, int amount) {
-//        this.vareID = vareID;
-//        this.amount = amount;
-//    }
-
-//    public int getAmount() {
-//        return amount;
-//    }
-//
-//    public void setAmount(int amount) {
-//        this.amount = amount;
-//    }
-
     public int getBrugerID() {
         return brugerID;
     }
@@ -158,11 +137,4 @@ public class Bestilling {
         this.status = status;
     }
 
-    //    public int getItemID() {
-//        return vareID;
-//    }
-//
-//    public void setItemID(int vareID) {
-//        this.vareID = vareID;
-//    }
 }

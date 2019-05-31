@@ -28,40 +28,6 @@ public class BrugerServiceImpl implements BrugerService{
                 bruger.getEmail());
 
     }
-//    @Override
-//    public boolean validerBruger(String brugernavn, String password) throws SQLException, ClassNotFoundException {
-//
-//        ResultSet resultSet = brugerRepository.selectBrugerLogin();
-//
-//        List<Bruger> brugere = new ArrayList<>();
-//
-//        while (resultSet.next()) {
-//
-//            String gemtBrugernavn = resultSet.getString("brugernavn");
-//            String gemtPassword = resultSet.getString("password");
-//
-//            brugere.add(new Bruger(gemtBrugernavn, gemtPassword));
-//        }
-//
-//        String bNavn;
-//        String pWord;
-//
-//        for (int i = 0; i < brugere.size(); i++) {
-//
-//            bNavn = brugere.get(i).getBrugernavn();
-//            pWord = brugere.get(i).getPassword();
-//
-//
-//            if (brugernavn.equals(bNavn) && password.equals(pWord)) {
-//
-//                return true;
-//            }
-//
-//       }
-//            return false;
-//
-//    }
-
 
     @Override
     public boolean validerBruger(Bruger bruger) throws SQLException, ClassNotFoundException {
@@ -78,37 +44,11 @@ public class BrugerServiceImpl implements BrugerService{
             bruger.setTelefon(resultSet.getInt("telefon"));
             bruger.setEmail(resultSet.getString("email"));
 
-           // if(brugernavn.equals(bruger.getBrugernavn()) && password.equals(bruger.getPassword())){
-                return true;}
-        //}
-        return false;
-    }
-
-    @Override
-    public List<Bruger> findBruger(int id) throws SQLException, ClassNotFoundException {
-
-        ResultSet resultSet = brugerRepository.selectBrugerMedId(id);
-
-        List<Bruger> brugere = new ArrayList<>();
-
-        while (resultSet.next()) {
-            Bruger bruger = new Bruger();
-            bruger.setBrugerID(resultSet.getInt("brugerID"));
-            bruger.setFornavn(resultSet.getString("fornavn"));
-            bruger.setFornavn(resultSet.getString("efternavn"));
-            bruger.setAdresse(resultSet.getString("adresse"));
-            bruger.setTelefon(resultSet.getInt("telefon"));
-            bruger.setEmail(resultSet.getString("email"));
-
-            brugere.add(bruger);
+                return true;
         }
 
-        return brugere;
-
+        return false;
     }
-
-
-
 
     @Override
     public boolean tjekAdminLogin(String brugernavn, String password) {

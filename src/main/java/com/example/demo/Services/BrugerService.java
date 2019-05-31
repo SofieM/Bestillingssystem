@@ -12,6 +12,5 @@ public interface BrugerService {
     public void opretBruger (Bruger bruger) throws SQLException, ClassNotFoundException;
     public boolean validerBruger(Bruger bruger) throws SQLException, ClassNotFoundException;
     public boolean tjekAdminLogin (String brugernavn, String password);
-    public List<Bruger> findBruger(int id)throws SQLException, ClassNotFoundException;
 
 }
