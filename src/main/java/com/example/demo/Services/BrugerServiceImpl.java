@@ -10,10 +10,13 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+//Indeholder metoder, der håndterer brugere
 //lavet af Sofie og Christine
 @Service
 public class BrugerServiceImpl implements BrugerService{
 
+    //laver en instans af BrugerRepository,
+    //så BrugerServiceImpl kan kommunikerer med databasen via. repository
     @Autowired
     BrugerRepository brugerRepository;
 
@@ -30,6 +33,10 @@ public class BrugerServiceImpl implements BrugerService{
 
     }
 
+    //henter værdier tilknyttet en bruger ind gennem repository
+    //sætter værdierne for brugeren ved hjælp af de set-metoder, der er i Models.Bruger
+    //returnerer true, hvis brugeren, der logger ind findes i databasen
+    //returnerer false hvis brugeren der logger ind ikke findes i databasen
     @Override
     public boolean validerBruger(Bruger bruger) throws SQLException, ClassNotFoundException {
         ResultSet resultSet = brugerRepository.selectBruger(bruger);

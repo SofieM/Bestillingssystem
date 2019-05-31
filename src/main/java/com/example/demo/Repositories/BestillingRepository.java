@@ -8,6 +8,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 //lavet af Sofie og Christine
+//indeholder metoder, der kommunikerer med vores MySQL database
 @Repository
 public class BestillingRepository {
 

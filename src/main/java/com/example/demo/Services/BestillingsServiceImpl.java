@@ -10,10 +10,13 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+//Indeholder metoder, der håndterer bestillinger
 //lavet af Sofie og Christine
 @Service
 public class BestillingsServiceImpl implements BestillingsService {
 
+    //laver en instans af BestillingRepository,
+    //så BestillingsServiceImpl kan kommunikerer med databasen via. repository
     @Autowired
     BestillingRepository bestillingRepository;
 

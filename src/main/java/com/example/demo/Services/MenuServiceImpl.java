@@ -10,14 +10,17 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-
+//Indeholder metoder, der håndterer menu
 //lavet af Sofie og Christine
 @Service
 public class MenuServiceImpl implements MenuService {
 
+    //laver en instans af MenuRepository,
+    //så MenuServiceImpl kan kommunikerer med databasen via. repository
     @Autowired
     MenuRepository menuRepository;
 
+    //henter menuen ind gennem repository og gemmer værdierne i en ArrayList
     @Override
     public List<Menu> hentMenu() throws SQLException, ClassNotFoundException {
         ResultSet resultSet = menuRepository.selectMenu();

@@ -8,6 +8,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 //lavet af Sofie og Christine
+//indeholder metoder, der kommunikerer med vores MySQL database
 @Repository
 public class MenuRepository {
     //joiner de to tabeller vare og pris på prisID og sorterer dem efter vareID - vores "menukort"
