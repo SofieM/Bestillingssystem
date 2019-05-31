@@ -4,10 +4,9 @@ import org.springframework.boot.autoconfigure.domain.EntityScan;
 
 @EntityScan
 public class Bruger {
-
+    private int brugerID;
     private String brugernavn;
     private String password;
-    private int brugerID;
     private String fornavn;
     private String efternavn;
     private String adresse;
@@ -38,13 +37,15 @@ public class Bruger {
         this.email = email;
     }
 
+    public Bruger(){
+
+    }
+
     public Bruger(int brugerID) {
         this.brugerID = brugerID;
     }
 
-    public Bruger(){
 
-    }
     public String getBrugernavn() {
         return brugernavn;
     }
@@ -109,8 +110,4 @@ public class Bruger {
         this.email = email;
     }
 
-    public String toString(){
-
-        return brugerID + " " + fornavn + " " + efternavn;
-    }
 }
