@@ -17,14 +17,14 @@ public class BrugerRepository {
 //opretter en bruger-tabel (er kun eksekveret én gang, for at få oprettet vores buger-tabel)
 public void createBrugerTabel() throws SQLException, ClassNotFoundException {
 
-    String SQLCreateBruger = "CREATE TABLE IF NOT EXISTS brugere" +
+    String SQLCreateBruger = "CREATE TABLE IF NOT EXISTS bruger" +
             "(" +
-            "brugerID int," +
-            " brugernavn varchar(100)," +
-            " password varchar(100), " + " fornavn varchar(100)," +
-            " efternavn varchar(100)," + " adresse varchar(100)," +
-            " telefon int," + " email varchar(100)"+
-            ")";
+            "brugerID int NOT NULL AUTO_INCREMENT," +
+            " brugernavn varchar(100) NOT NULL," +
+            " password varchar(100) NOT NULL, " + " fornavn varchar(100) NOT NULL," +
+            " efternavn varchar(100) NOT NULL," + " adresse varchar(100) NOT NULL," +
+            " telefon int NOT NULL," + " email varchar(100) NOT NULL, "+
+            "PRIMARY KEY(brugerID))";
             SQLExecute(SQLCreateBruger);
 }
 
@@ -49,8 +49,6 @@ public void insertBruger(String brugernavn, String password, String fornavn, Str
             telefon + "', '" +
             email + "')";
             SQLExecute(SQLInsertBruger);
-
-
 }
 
 //henter en enkelt bruger, ud fra brugernavn og password
