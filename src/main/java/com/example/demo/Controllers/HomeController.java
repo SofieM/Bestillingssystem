@@ -51,7 +51,7 @@ public class HomeController {
         String password = wr.getParameter("password");
 
         if(brugerService.tjekAdminLogin(brugernavn,password)){
-
+            session.setAttribute("logget_ind", true);
             return "redirect:/adminSide";
         }
         //finder Bruger-attributter og gemmer dem som sessions-attributter, så brugerens informationer er
@@ -67,7 +67,7 @@ public class HomeController {
             session.setAttribute("adresse", bruger.getAdresse());
             session.setAttribute("telefon",bruger.getTelefon());
             session.setAttribute("email", bruger.getEmail());
-
+            session.setAttribute("logget_ind", true);
             return "redirect:/BrugerSide";
         }
         else{
@@ -91,21 +91,39 @@ public class HomeController {
     }
 
     @GetMapping("/BrugerSide")
-    public String brugerSide(Model model) throws SQLException, ClassNotFoundException {
+    public String brugerSide(HttpSession session){
 
-                List<Menu> menu = menuService.hentMenu();
-                model.addAttribute("menu", menu);
+        try {
+            Object v = session.getAttribute("logget_ind");
+            if(v instanceof Boolean && (Boolean) v) {
 
                 return "BrugerSide";
+            } else {
+                return "redirect:/";
+            }
+        } catch (Exception ee) {
+            return "redirect:/";
+        }
     }
 
     @GetMapping("/lavBestilling")
-    public String lavBestilling(Model model) throws SQLException, ClassNotFoundException {
-        List<Menu> menu = menuService.hentMenu();
-        model.addAttribute("menu", menu);
-        model.addAttribute("bestilling", new Bestilling());
+    public String lavBestilling(Model model, HttpSession session) throws SQLException, ClassNotFoundException {
 
-        return "lavBestilling";
+        try {
+            Object v = session.getAttribute("logget_ind");
+            if(v instanceof Boolean && (Boolean) v) {
+                List<Menu> menu = menuService.hentMenu();
+                model.addAttribute("menu", menu);
+                model.addAttribute("bestilling", new Bestilling());
+
+                return "lavBestilling";
+            } else {
+                return "redirect:/";
+            }
+        } catch (Exception ee) {
+            return "redirect:/";
+        }
+
     }
 
     @PostMapping("/lavBestilling")
@@ -117,54 +135,120 @@ public class HomeController {
 
     @GetMapping("/seBestillinger/{id}")
     public String seBestillinger(@PathVariable ("id") String id , HttpSession session, Model model) throws SQLException, ClassNotFoundException {
-        int brugerID = Integer.parseInt(session.getAttribute("brugerId").toString());
-        System.out.println(brugerID);
-        List<Bestilling> brugersBestillinger = bestillingsService.hentBrugersBestillinger(brugerID);
-        model.addAttribute("brugersBestillinger", brugersBestillinger);
-        return "seBestillinger";
+        try {
+            Object v = session.getAttribute("logget_ind");
+            if(v instanceof Boolean && (Boolean) v) {
+                int brugerID = Integer.parseInt(session.getAttribute("brugerId").toString());
+                List<Bestilling> brugersBestillinger = bestillingsService.hentBrugersBestillinger(brugerID);
+                model.addAttribute("brugersBestillinger", brugersBestillinger);
+
+                return "seBestillinger";
+            } else {
+                return "redirect:/";
+            }
+        } catch (Exception ee) {
+            return "redirect:/";
+        }
+
     }
 
     @GetMapping("/adminSide")
-    public String adminSide(){
-
-
-        return "adminSide";
+    public String adminSide(HttpSession session){
+        try {
+            Object v = session.getAttribute("logget_ind");
+            if(v instanceof Boolean && (Boolean) v) {
+                return "adminSide";
+            } else {
+                return "redirect:/";
+            }
+        } catch (Exception ee) {
+            return "redirect:/";
+        }
     }
 
     @GetMapping("/alleBestillinger")
-    public String alleBestillinger(Model model) throws SQLException, ClassNotFoundException {
-        List<Bestilling> alleBestillinger = bestillingsService.hentAlleBestillinger();
-        model.addAttribute("alleBestillinger",alleBestillinger);
-        return "alleBestillinger";
+    public String alleBestillinger(Model model, HttpSession session) throws SQLException, ClassNotFoundException {
+
+        try {
+            Object v = session.getAttribute("logget_ind");
+            if(v instanceof Boolean && (Boolean) v) {
+                List<Bestilling> alleBestillinger = bestillingsService.hentAlleBestillinger();
+                model.addAttribute("alleBestillinger",alleBestillinger);
+                return "alleBestillinger";
+            } else {
+                return "redirect:/";
+            }
+        } catch (Exception ee) {
+            return "redirect:/";
+        }
+
     }
 
     @GetMapping("afvis/{id}")
-    public String afvisBestilling(@PathVariable ("id") int id) throws SQLException, ClassNotFoundException {
+    public String afvisBestilling(@PathVariable ("id") int id, HttpSession session) throws SQLException, ClassNotFoundException {
+        try {
+            Object v = session.getAttribute("logget_ind");
+            if(v instanceof Boolean && (Boolean) v) {
+                bestillingsService.sletBestilling(id);
+                return "redirect:/alleBestillinger";
+            } else {
+                return "redirect:/";
+            }
+        } catch (Exception ee) {
+            return "redirect:/";
+        }
 
-        bestillingsService.sletBestilling(id);
-        return "redirect:/alleBestillinger";
     }
 
     @GetMapping("godkend/{id}")
-    public String godkendBestilling(@PathVariable ("id") int id) throws SQLException, ClassNotFoundException{
+    public String godkendBestilling(@PathVariable ("id") int id, HttpSession session) throws SQLException, ClassNotFoundException{
 
-        bestillingsService.godkendBestilling(id);
+        try {
+            Object v = session.getAttribute("logget_ind");
+            if(v instanceof Boolean && (Boolean) v) {
+                bestillingsService.godkendBestilling(id);
+                return "redirect:/alleBestillinger";
+            } else {
+                return "redirect:/";
+            }
+        } catch (Exception ee) {
+            return "redirect:/";
+        }
 
-        return "redirect:/alleBestillinger";
     }
 
     @GetMapping("/godkendteBestillinger")
-    public String godkendteBestillinger(Model model) throws SQLException, ClassNotFoundException {
-        List<Bestilling> godkendteBestillinger = bestillingsService.hentGodkendteBestillinger();
-        model.addAttribute("godkendteBestillinger",godkendteBestillinger);
-        return "godkendteBestillinger";
+    public String godkendteBestillinger(Model model, HttpSession session) throws SQLException, ClassNotFoundException {
+
+        try {
+            Object v = session.getAttribute("logget_ind");
+            if(v instanceof Boolean && (Boolean) v) {
+                List<Bestilling> godkendteBestillinger = bestillingsService.hentGodkendteBestillinger();
+                model.addAttribute("godkendteBestillinger",godkendteBestillinger);
+                return "godkendteBestillinger";
+            } else {
+                return "redirect:/";
+            }
+        } catch (Exception ee) {
+            return "redirect:/";
+        }
+
     }
 
     @GetMapping("afslut/{id}")
-    public String afslutBestilling(@PathVariable ("id") int id) throws SQLException, ClassNotFoundException {
+    public String afslutBestilling(@PathVariable ("id") int id, HttpSession session) throws SQLException, ClassNotFoundException {
+        try {
+            Object v = session.getAttribute("logget_ind");
+            if(v instanceof Boolean && (Boolean) v) {
+                bestillingsService.sletBestilling(id);
+                return "redirect:/godkendteBestillinger";
+            } else {
+                return "redirect:/";
+            }
+        } catch (Exception ee) {
+            return "redirect:/";
+        }
 
-        bestillingsService.sletBestilling(id);
-        return "redirect:/godkendteBestillinger";
 
     }
 

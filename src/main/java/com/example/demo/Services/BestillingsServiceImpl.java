@@ -16,7 +16,7 @@ import java.util.List;
 public class BestillingsServiceImpl implements BestillingsService {
 
     //laver en instans af BestillingRepository,
-    //så BestillingsServiceImpl kan kommunikerer med databasen via. repository
+    //så BestillingsServiceImpl kan kommunikere med databasen via. repository
     @Autowired
     BestillingRepository bestillingRepository;
 

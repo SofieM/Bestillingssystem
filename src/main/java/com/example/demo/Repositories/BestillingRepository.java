@@ -84,7 +84,7 @@ public class BestillingRepository {
                 "LEFT JOIN bruger " +
                 "ON bestilling.brugerID = bruger.brugerID " +
                 "WHERE bestilling.status = 'godkendt' " +
-                "ORDER BY bestilling.dato asc, bestilling.klokkeslet asc ;";
+                "ORDER BY bestilling.dato asc, bestilling.klokkeslet asc;";
         ResultSet resultSet = stmt.executeQuery(selectGodkendteBestillinger);
         return resultSet;
     }
